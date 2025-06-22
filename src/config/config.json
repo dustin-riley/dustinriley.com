@@ -1,0 +1,35 @@
+{
+  "site": {
+    "title": "Dustin Riley | My Blog",
+    "base_url": "https://dustinriley.com",
+    "base_path": "/",
+    "trailing_slash": false,
+    "favicon": "/images/favicon.png",
+    "logo": "",
+    "logo_width": "200",
+    "logo_height": "34",
+    "logo_text": "DustinRiley.com"
+  },
+
+  "settings": {
+    "pagination": 5,
+    "summary_length": 100
+  },
+
+  "metadata": {
+    "meta_author": "Themefisher",
+    "meta_image": "/images/og-image.png",
+    "meta_description": "Bookworm Light Astro Blog Template"
+  },
+
+  "params": {
+    "contact_form_action": "#",
+    "copyright": "Copyright © 2025 a theme by [Themefisher](https://themefisher.com)"
+  },
+
+  "contactinfo": {
+    "address": "355 S Grand Ave <br/> Los Angeles, CA 90071",
+    "email": "me@dustinriley.com",
+    "phone": ""
+  }
+}

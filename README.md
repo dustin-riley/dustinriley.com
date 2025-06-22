@@ -1,6 +1,6 @@
-<h1 align=center>Bookworm Light Astro</h1>
-<p align=center>Bookworm Light is a feature-rich, minimal, highly customizable, easy-to-use free Astro blog theme.</p>
-<h2 align="center"> <a target="_blank" href="https://bookworm-light-astro.vercel.app/" rel="nofollow">👀Demo</a> | <a  target="_blank" href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fbookworm-light-astro.vercel.app%2F&form_factor=desktop">Page Speed (100%)🚀</a>
+<h1 align=center>dustinriley.com</h1>
+<p align=center>This is my blog and central directory for any side projects I'm taking on.</p>
+<h2 align="center"> <a target="_blank" href="https://dustinriley.com/" rel="nofollow">👀 See It</a> | <a  target="_blank" href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fdustinriley.com%2F&form_factor=desktop">Page Speed (100%)🚀</a>
 </h2>
 
 <p align=center>
@@ -13,13 +13,9 @@
 
   <img src="https://img.shields.io/github/languages/code-size/themefisher/bookworm-light-astro" alt="code size">
 
-  <a href="https://github.com/themefisher/bookworm-light-astro/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/themefisher/bigspring-light-astro" alt="contributors"></a>
+  <a href="https://app.netlify.com/projects/dustinrileycom/deploys">
+    <img src="https://api.netlify.com/api/v1/badges/6d219a46-f0ef-4513-84cb-5e07245e30e2/deploy-status" alt="deploy status"></a>
 </p>
-
-![bookworm-light](https://demo.gethugothemes.com/thumbnails/bookworm-light.png)
-
-Bookworm Light is a minimal multi-author free Astro blog theme which is perfect for any kind of blog website. Whether you're interested in food, beauty, travel, photography, lifestyle, fitness, health, or other topics, this theme is a great fit. The theme is super fast and SEO friendly which makes it easier for your content to be discovered by search engines.
 
 ## 🔑Key Features
 

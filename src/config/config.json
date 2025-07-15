@@ -17,9 +17,9 @@
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
+    "meta_author": "Dustin Riley",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Bookworm Light Astro Blog Template"
+    "meta_description": "Dustin Riley | My Blog"
   },
 
   "params": {
@@ -28,7 +28,7 @@
   },
 
   "contactinfo": {
-    "address": "355 S Grand Ave <br/> Los Angeles, CA 90071",
+    "address": "",
     "email": "me@dustinriley.com",
     "phone": ""
   }

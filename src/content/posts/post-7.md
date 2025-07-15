@@ -7,7 +7,6 @@ image: "/images/posts/01.jpg"
 categories: ["art"]
 authors: ["Mark Dinn"]
 tags: ["diy", "toy"]
-draft: false
 draft: true
 ---
 

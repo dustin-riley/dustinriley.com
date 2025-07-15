@@ -7,7 +7,7 @@ image: "/images/posts/02.jpg"
 categories: ["development"]
 authors: ["John Doe"]
 tags: ["diy", "toy"]
-draft: false
+draft: true
 ---
 
 Nemo vel ad consectetur namut rutrum ex, venenatis sollicitudin urna. Aliquam erat volutpat. Integer eu ipsum sem. Ut bibendum lacus vestibulum maximus suscipit. Quisque vitae nibh iaculis neque blandit euismod.

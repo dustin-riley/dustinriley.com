@@ -16,7 +16,7 @@ I'm excited to announce the launch of this new space—a personal playground whe
 
 ## Why This Website?
 
-I've accumulated a collection of experiences, lessons, and ideas from working in tech. I wanted a dedicated place to:
+I've built a collection of experiences, lessons, and ideas from working in tech. I wanted a dedicated place to:
 
 - **Experiment** with new technologies, frameworks, and ideas.
 - **Build** projects, tools, and resources that might help others (and myself).

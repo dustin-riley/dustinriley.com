@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
   const paths = allPages.map((page) => ({
     params: {
-      regular: page.id.replace(/\.(md|mdx)$/, ""),
+      regular: page.id,
     },
     props: { page },
   }));

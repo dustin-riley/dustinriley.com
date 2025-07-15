@@ -33,6 +33,6 @@ Here, you'll find:
 
 ## Join Me on This Journey
 
-Whether you're a fellow engineer, a manager, or just curious about the world of tech, I hope you'll find something valuable here. Feel free to reach out, comment, or share your own experiences. Let's learn and grow together!
+Whether you're a fellow engineer, a manager, or just curious about the world of tech, I hope you'll find something valuable here. Feel free to reach out and share your own experiences. Let's learn and grow together!
 
 Stay tuned for more posts, projects, and experiments. This is just the beginning.

@@ -4,7 +4,7 @@
     "base_url": "https://dustinriley.com",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/favicon.png",
+    "favicon": "/images/favicon.ico",
     "logo": "",
     "logo_width": "200",
     "logo_height": "34",

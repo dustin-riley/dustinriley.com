@@ -8,6 +8,7 @@ draft: false
 authors: ["Mark Dinn"]
 tags: ["Alarm", "Clock"]
 categories: ["LifeStyle"]
+draft: true
 ---
 
 Almost every day for the past nine or so months has felt like March 13, and that can sometimes make it difficult to want to wake up for the day ahead of you.

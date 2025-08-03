@@ -8,7 +8,7 @@
     "logo": "",
     "logo_width": "200",
     "logo_height": "34",
-    "logo_text": "DustinRiley.com"
+    "logo_text": "dustinriley.com"
   },
 
   "settings": {
@@ -17,18 +17,18 @@
   },
 
   "metadata": {
-    "meta_author": "Themefisher",
+    "meta_author": "Dustin Riley",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Bookworm Light Astro Blog Template"
+    "meta_description": "Software engineering insights, data visualization projects, and technical explorations by Dustin Riley"
   },
 
   "params": {
     "contact_form_action": "#",
-    "copyright": "Copyright © 2025 a theme by [Themefisher](https://themefisher.com)"
+    "copyright": "Copyright © 2025 Dustin Riley. All rights reserved."
   },
 
   "contactinfo": {
-    "address": "355 S Grand Ave <br/> Los Angeles, CA 90071",
+    "address": "",
     "email": "me@dustinriley.com",
     "phone": ""
   }

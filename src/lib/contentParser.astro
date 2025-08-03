@@ -25,6 +25,12 @@ export const getSinglePage = async <C extends CollectionKey>(
     return pageData.draft !== true;
   });
 
-  return removeDrafts;
+  // Strip .md and .mdx extensions from id for clean URLs
+  const cleanedPages = removeDrafts.map((page) => ({
+    ...page,
+    id: page.id.replace(/\.(md|mdx)$/, ""),
+  }));
+
+  return cleanedPages;
 };
 ---

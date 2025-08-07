@@ -23,7 +23,7 @@ It started with a simple tweet thread. One Communications Director had shared a 
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-That's when it hit me: why should this amazing visualization be limited to individual programs with the resources to create custom graphics? What if there was a website where any fan could explore scorigami data for their favorite team, conference, or even compare across different eras of college football?
+That's when it hit me: What if there was a website where any fan could explore scorigami data for their favorite team, conference, or even compare across different eras of college football?
 
 For those unfamiliar with the concept, "scorigami" was popularized by Jon Bois in his excellent video series, referring to final scores that have never occurred before in a sport's history. It's a delightfully nerdy way to look at sports statistics.
 
@@ -43,7 +43,7 @@ For those unfamiliar with the concept, "scorigami" was popularized by Jon Bois i
 
 ### The Tech Stack
 
-I chose **Next.js 15** as the foundation, leveraging its App Router architecture for optimal performance and developer experience. The full stack includes:
+I chose **Next.js 15** for learning. I hadn't used it before and this felt like it met the usecase. The full stack includes:
 
 - **Frontend**: React 19 with TypeScript for type safety
 - **Styling**: Tailwind CSS v4 with shadcn/ui components

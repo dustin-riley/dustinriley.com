@@ -12,20 +12,22 @@ draft: false
 
 # I Built a College Football Scorigami Tool Because I'm That Kind of Fan
 
-I'm the guy who plans his fall Saturdays around the college football schedule. I went to Miami (Ohio) — Love and Honor — and I still travel to away games with friends whenever I can. It's one of my favorite things in the world. So when I say this project started because I'm a college football nerd, I need you to understand the depth of that statement.
+I plan my fall Saturdays around college football. Went to Miami (Ohio) — Love and Honor — and I still drive to away games whenever I can swing it. It's legitimately one of my favorite things.
+
+So when I say this project started because I'm a college football nerd, understand that I mean it in the most sincere way possible.
 
 ## How This Started
 
-I was scrolling Twitter/X and stumbled into a thread where FBS Communications Directors were sharing scorigami charts for their programs. One posted theirs, another replied saying they were going to make one for their school. It was a whole thing.
+I was scrolling Twitter and saw FBS Communications Directors sharing scorigami charts for their programs. One guy posted theirs, someone else replied they were going to make one too. Whole thread of them trading charts.
 
 <blockquote class="twitter-tweet" data-theme="light">
   <a href="https://twitter.com/DaveMeyerMU/status/1944756268561826098"></a>
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-And my immediate thought was: why isn't there a site where any fan can just look this up for their team?
+And I had the thought: why isn't there just a site where anyone can look this up for their team?
 
-If you're not familiar with scorigami — Jon Bois popularized the concept. It's the idea that certain final scores in a sport have literally never happened before. When one occurs, that's a scorigami. His video on it is fantastic and you should watch it:
+If you don't know scorigami — Jon Bois made it famous. The idea is simple: certain final scores have never happened before in a sport. When one finally occurs, that's scorigami. His video on it is great:
 
 <div class="my-8 flex justify-center">
   <iframe
@@ -39,11 +41,11 @@ If you're not familiar with scorigami — Jon Bois popularized the concept. It's
   </iframe>
 </div>
 
-So I had the idea. I had the motivation. I had evenings and weekends. Time to build something.
+So I had the idea, the motivation, and evenings after work. Let's build something.
 
 ## The Build
 
-I went with **Next.js 15** for this one — partly because it fit the use case well and partly because I hadn't used it yet and wanted to learn. The rest of the stack:
+I went with **Next.js 15** — partly because it fit, partly because I hadn't used it yet. Stack:
 
 - **React 19 + TypeScript** on the frontend
 - **Tailwind CSS v4** with **shadcn/ui** for components
@@ -53,28 +55,28 @@ I went with **Next.js 15** for this one — partly because it fit the use case w
 
 ### Getting the Data In
 
-The [College Football Data API](https://collegefootballdata.com/) is a gift to anyone building sports projects. It's free for developers and has an absurd amount of historical game data.
+The [College Football Data API](https://collegefootballdata.com/) is a gift. Free for developers, ridiculous amount of historical data.
 
-My first version just hit the API directly. That worked fine until someone tried to load something like all SEC games across 20+ years. The API would time out after 30 seconds and the user would get nothing. Not great.
+First version just hit the API directly. Worked until someone loaded all SEC games over 20 years and it timed out. Not great.
 
-So I set up a PostgreSQL database on Neon and built a data pipeline to pull games from CFBD and store them locally. Now the site queries its own database instead of hammering an external API on every request. Faster for users, more reliable, and it lets me do filtering and aggregations that would've been painful to do through API calls alone.
+So I set up PostgreSQL on Neon, built a pipeline to pull games from CFBD and cache them locally. Now the site queries its own database. Way faster, way more reliable, and I can do aggregations that would've been a nightmare through raw API calls.
 
 ### The Heatmap
 
-This was the fun part. The whole visualization is a heatmap — winning score on one axis, losing score on the other, and each cell is colored by how many times that exact score has occurred.
+This was the fun part. Winning score on one axis, losing score on the other, cells colored by how many times that score happened.
 
-I actually started with ApexCharts for this, but it felt like bringing a sledgehammer to hang a picture frame. What I really needed was a colored grid. So I ripped it out and built the heatmap with pure CSS Grid and Tailwind. Each cell is a div. The color intensity scales based on frequency. That's it.
+Started with ApexCharts. Felt like overkill. I just needed a colored grid. Ripped it out, rebuilt with CSS Grid and Tailwind. Each cell is a div. Color scales with frequency. Done.
 
-The result was a way smaller bundle, faster rendering (especially on big datasets), and honestly better mobile behavior. Sometimes the boring solution is the right one.
+Way smaller bundle, faster rendering, better on mobile. Sometimes boring is right.
 
 ### Filtering
 
-The whole point was to let people explore scorigami for *their* team, so filtering is core to the experience. You can filter by team, conference, date range — slice it however you want. The filters hit the Postgres database through Next.js API routes and the heatmap re-renders with the results.
+The whole point was letting people explore *their* team, so filtering matters. Team, conference, date range — slice it however. Filters hit Postgres through API routes, heatmap updates.
 
 ## Go Play With It
 
-The site is live at [scorigami.dustinriley.com](https://scorigami.dustinriley.com). Go look up your team. Find the weird scores. Text your friends about them. That's literally why I built it.
+The site's at [scorigami.dustinriley.com](https://scorigami.dustinriley.com). Look up your team. Find the weird scores. Text someone about it.
 
-This was one of those projects where the motivation was never "this will look good on a resume." I just love college football, I love building things, and I saw a gap I could fill. Those are the best side projects — the ones where you're your own target user.
+This wasn't for a resume. I just love college football and wanted the thing to exist. Best side projects are the ones you build for yourself.
 
-*Check it out at [scorigami.dustinriley.com](https://scorigami.dustinriley.com) and let me know what you find.*
+*[scorigami.dustinriley.com](https://scorigami.dustinriley.com)*

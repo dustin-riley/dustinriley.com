@@ -1,0 +1,101 @@
+/* ============================================================
+   Dustin Riley Design System — Colors & Type tokens
+   Digital mid-century modern. Warm neutrals + restrained color.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  /* Color: Warm Neutrals */
+  --ds-bg: #faf6f0;
+  --ds-surface: #f3ece0;
+  --ds-surface-sunken: #ede4d3;
+  --ds-border: #e0d5c2;
+  --ds-text: #1f1a14;
+  --ds-text-muted: #6b5f50;
+
+  /* Color: Primary (burnt orange) */
+  --ds-primary: #b8541c;
+  --ds-primary-hover: #9e4615;
+  --ds-primary-pressed: #85390f;
+
+  /* Color: Accents */
+  --ds-accent-ochre: #c9922b;
+  --ds-accent-teal: #2e7d7a;
+
+  /* Color: Semantic */
+  --ds-success: #5c7a3e;
+  --ds-warning: #c9922b;
+  --ds-error: #a8392e;
+
+  /* On-color foregrounds */
+  --ds-on-primary: #ffffff;
+
+  /* Typography: families */
+  --ds-font-display: "Outfit", system-ui, sans-serif;
+  --ds-font-body: "DM Sans", system-ui, sans-serif;
+  --ds-font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Typography: scale (1.25 ratio, 16px root) */
+  --ds-fs-display: 3rem;
+  --ds-fs-h1: 2.25rem;
+  --ds-fs-h2: 1.75rem;
+  --ds-fs-h3: 1.375rem;
+  --ds-fs-body-lg: 1.125rem;
+  --ds-fs-body: 1rem;
+  --ds-fs-body-sm: 0.875rem;
+  --ds-fs-caption: 0.75rem;
+
+  --ds-lh-display: 1.1;
+  --ds-lh-h1: 1.15;
+  --ds-lh-h2: 1.2;
+  --ds-lh-h3: 1.3;
+  --ds-lh-body-lg: 1.5;
+  --ds-lh-body: 1.5;
+
+  --ds-tracking-display: -0.02em;
+  --ds-tracking-h1: -0.02em;
+  --ds-tracking-h2: -0.01em;
+  --ds-tracking-h3: -0.01em;
+
+  /* Spacing: 4px base */
+  --ds-space-0: 0;
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-5: 24px;
+  --ds-space-6: 32px;
+  --ds-space-7: 48px;
+  --ds-space-8: 64px;
+  --ds-space-9: 96px;
+
+  /* Radius (3 only) */
+  --ds-radius-sm: 8px;
+  --ds-radius-md: 16px;
+  --ds-radius-pill: 999px;
+
+  /* Shadow (warm-tinted) */
+  --ds-shadow-sm: 0 1px 2px rgba(74, 52, 28, 0.06),
+    0 1px 1px rgba(74, 52, 28, 0.04);
+  --ds-shadow-md: 0 4px 8px rgba(74, 52, 28, 0.08),
+    0 2px 4px rgba(74, 52, 28, 0.05);
+  --ds-shadow-lg: 0 16px 32px rgba(74, 52, 28, 0.12),
+    0 4px 8px rgba(74, 52, 28, 0.06);
+
+  /* Motion */
+  --ds-duration-fast: 120ms;
+  --ds-duration-base: 200ms;
+  --ds-duration-slow: 280ms;
+  --ds-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Focus ring */
+  --ds-focus-ring:
+    0 0 0 2px var(--ds-bg), 0 0 0 4px rgba(184, 84, 28, 0.4);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+  border-radius: var(--ds-radius-sm);
+}

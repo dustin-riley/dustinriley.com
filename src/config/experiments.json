@@ -1,0 +1,12 @@
+[
+  {
+    "slug": "scorigami",
+    "tag": "college football · data viz",
+    "title": "College football scorigami",
+    "description": "Every unique final score in college football history, plotted on a grid. Pan through decades, filter by team, and watch the gaps close.",
+    "year": "2025",
+    "kind": "interactive",
+    "url": "https://scorigami.dustinriley.com",
+    "external": true
+  }
+]

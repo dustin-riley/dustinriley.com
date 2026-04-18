@@ -1,8 +1,7 @@
 ---
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
-import Pagination from "@/layouts/components/Pagination.astro";
-import Posts from "@/layouts/Posts.astro";
+import WritingList from "@/components/WritingList.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 
@@ -29,13 +28,23 @@ const currentPage = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
 const indexOfLastPost = currentPage * config.settings.pagination;
 const indexOfFirstPost = indexOfLastPost - config.settings.pagination;
 const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+const prevPage = currentPage > 1 ? (currentPage === 2 ? "/writing" : `/page/${currentPage - 1}`) : null;
+const nextPage = currentPage < totalPages ? `/page/${currentPage + 1}` : null;
 ---
 
-<Base>
-  <section class="section">
-    <div class="container">
-      <Posts className="mb-16" posts={currentPosts} />
-      <Pagination totalPages={totalPages} currentPage={currentPage} />
-    </div>
-  </section>
+<Base title={`writing · page ${currentPage}`}>
+  <div class="ds-container">
+    <section style="padding-top: var(--ds-space-7);">
+      <p class="grid-label" style="margin: 0 0 var(--ds-space-2);">writing</p>
+      <h1 style="margin: 0 0 var(--ds-space-6); font-size: var(--ds-fs-h1); font-family: var(--ds-font-display); letter-spacing: var(--ds-tracking-h1);">
+        page {currentPage} of {totalPages}
+      </h1>
+      <WritingList posts={currentPosts} heading="" />
+      <nav style="display: flex; justify-content: space-between; font-family: var(--ds-font-mono); font-size: 12px; margin-top: var(--ds-space-5);">
+        <div>{prevPage && <a href={prevPage}>← newer</a>}</div>
+        <div>{nextPage && <a href={nextPage}>older →</a>}</div>
+      </nav>
+    </section>
+  </div>
 </Base>

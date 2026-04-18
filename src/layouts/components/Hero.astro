@@ -1,0 +1,26 @@
+---
+export interface Props {
+  headline?: string;
+  lede?: string;
+  primaryCta?: { label: string; url: string };
+  secondaryCta?: { label: string; url: string };
+}
+
+const {
+  headline = "I'm Dustin. I build small things at the edges of software and whatever hobby I'm deep in this month.",
+  lede = "Mostly for fun. Occasionally useful. Always a little unfinished.",
+  primaryCta = { label: "see the experiments →", url: "/experiments" },
+  secondaryCta = { label: "about me", url: "/about" },
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class="blob-1" aria-hidden="true"></div>
+  <div class="blob-2" aria-hidden="true"></div>
+  <h1 class="ds-display">{headline}</h1>
+  <p class="lede">{lede}</p>
+  <div class="cta-row">
+    <a class="ds-btn ds-btn-primary" href={primaryCta.url}>{primaryCta.label}</a>
+    <a class="ds-btn ds-btn-ghost" href={secondaryCta.url}>{secondaryCta.label}</a>
+  </div>
+</section>

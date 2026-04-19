@@ -4,14 +4,17 @@ import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
 
-export async function getStaticPaths({ paginate }: any) {
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = await getSinglePage("posts");
   const sorted = sortByDate(posts);
   return paginate(sorted, { pageSize: config.settings.pagination });
-}
+};
 
-const { page } = Astro.props;
+type Props = { page: Page<CollectionEntry<"posts">> };
+const { page } = Astro.props as Props;
 const pageTitle =
   page.currentPage === 1 ? "writing" : `writing · page ${page.currentPage}`;
 ---

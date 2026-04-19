@@ -1,12 +1,25 @@
 ---
-import experiments from "@/config/experiments.json";
+import experimentsData from "@/config/experiments.json";
+
+interface Experiment {
+  slug: string;
+  tag: string;
+  title: string;
+  description: string;
+  year: string;
+  kind: string;
+  url: string;
+  external?: boolean;
+}
+
+const experiments = experimentsData as Experiment[];
 ---
 
 <section>
   <h2 class="grid-label">experiments</h2>
   <div class="experiment-grid">
     {
-      experiments.map((x: any) => (
+      experiments.map((x) => (
         <a
           class="experiment-card"
           href={x.url}

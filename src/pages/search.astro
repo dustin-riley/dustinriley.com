@@ -3,10 +3,7 @@ import Base from "@/layouts/Base.astro";
 import SearchBar from "@/layouts/SearchBar";
 import { getSinglePage } from "@/lib/contentParser.astro";
 
-// Retrieve all articles
 const posts = await getSinglePage("posts");
-
-// List of items to search in
 const searchList = posts.map((item) => ({
   slug: item.id,
   data: item.data,
@@ -14,10 +11,19 @@ const searchList = posts.map((item) => ({
 }));
 ---
 
-<Base title={`Search`}>
-  <section class="section">
-    <div class="container">
+<Base title="search" description="Search across everything I've written.">
+  <div class="ds-container">
+    <section style="padding-top: var(--ds-space-7); min-height: 60vh;">
+      <p class="grid-label" style="margin: 0 0 var(--ds-space-2);">search</p>
+      <h1
+        style="margin: 0 0 var(--ds-space-3); font-size: var(--ds-fs-h1); font-family: var(--ds-font-display); letter-spacing: var(--ds-tracking-h1);"
+      >
+        find a post
+      </h1>
+      <p class="ds-lede" style="margin: 0 0 var(--ds-space-6); max-width: 620px;">
+        Searches titles, descriptions, tags, categories, and body text.
+      </p>
       <SearchBar client:load searchList={searchList} />
-    </div>
-  </section>
+    </section>
+  </div>
 </Base>

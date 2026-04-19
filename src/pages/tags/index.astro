@@ -3,30 +3,36 @@ import Base from "@/layouts/Base.astro";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
 import { humanize } from "@/lib/utils/textConverter";
 
-import { FaHashtag } from "react-icons/fa";
-
 const tags = await getTaxonomy("posts", "tags");
 ---
 
-<Base title={"Tags"}>
-  <section class="section">
-    <div class="container text-center">
-      <h1 class="h2 page-heading">Tags</h1>
-      <ul class="space-x-4">
-        {
-          tags.map((tag) => (
-            <li class="inline-block">
-              <a
-                href={`/tags/${tag}`}
-                class="rounded-lg bg-light px-4 py-2 text-dark transition hover:bg-primary hover:text-white flex items-center group"
-              >
-                <FaHashtag className="mr-1 text-primary group-hover:text-white transition" />
-                {humanize(tag || "")}
+<Base title="tags" description="Browse writing by tag.">
+  <div class="ds-container">
+    <section style="padding-top: var(--ds-space-7);">
+      <p class="grid-label" style="margin: 0 0 var(--ds-space-2);">tags</p>
+      <h1
+        style="margin: 0 0 var(--ds-space-3); font-size: var(--ds-fs-h1); font-family: var(--ds-font-display); letter-spacing: var(--ds-tracking-h1);"
+      >
+        browse by tag
+      </h1>
+      <p class="ds-lede" style="margin: 0 0 var(--ds-space-6); max-width: 620px;">
+        Every tag that shows up on a post, in one place.
+      </p>
+      {
+        tags.length === 0 ? (
+          <p class="ds-lede">No tags yet.</p>
+        ) : (
+          <div
+            style="display: flex; flex-wrap: wrap; gap: var(--ds-space-2); margin-bottom: var(--ds-space-8);"
+          >
+            {tags.map((tag) => (
+              <a class="tag-chip" href={`/tags/${tag}`}>
+                #{humanize(tag || "")}
               </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+            ))}
+          </div>
+        )
+      }
+    </section>
+  </div>
 </Base>

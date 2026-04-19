@@ -649,3 +649,52 @@ pre {
   color: var(--ds-primary);
   background: var(--ds-surface-sunken);
 }
+
+/* ----- Tag chip (shared outside articles too) ----- */
+a.tag-chip {
+  font-family: var(--ds-font-mono);
+  font-size: 12px;
+  color: var(--ds-text-muted);
+  background: var(--ds-surface);
+  padding: 6px 12px;
+  border-radius: var(--ds-radius-pill);
+  text-decoration: none;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  transition:
+    background var(--ds-duration-fast) var(--ds-ease-standard),
+    color var(--ds-duration-fast) var(--ds-ease-standard);
+}
+
+a.tag-chip:hover {
+  color: var(--ds-primary);
+  background: var(--ds-surface-sunken);
+}
+
+/* ----- Search input ----- */
+.ds-search-input {
+  width: 100%;
+  padding: 14px 20px;
+  font-family: var(--ds-font-body);
+  font-size: 16px;
+  background: var(--ds-surface);
+  color: var(--ds-text);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-pill);
+  outline: none;
+  transition:
+    border-color var(--ds-duration-fast) var(--ds-ease-standard),
+    box-shadow var(--ds-duration-base) var(--ds-ease-standard),
+    background var(--ds-duration-fast) var(--ds-ease-standard);
+}
+
+.ds-search-input::placeholder {
+  color: var(--ds-text-muted);
+}
+
+.ds-search-input:focus,
+.ds-search-input:focus-visible {
+  background: var(--ds-bg);
+  border-color: var(--ds-primary);
+  box-shadow: 0 0 0 3px rgba(184, 84, 28, 0.15);
+}

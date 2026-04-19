@@ -4,29 +4,35 @@ import { getTaxonomy } from "@/lib/taxonomyParser.astro";
 import { humanize } from "@/lib/utils/textConverter";
 
 const categories = await getTaxonomy("posts", "categories");
-
-import { BiCategoryAlt } from "react-icons/bi";
 ---
 
-<Base title={"Categories"}>
-  <section class="section">
-    <div class="container text-center">
-      <h1 class="h2 page-heading">Categories</h1>
-      <ul class="space-x-4">
-        {
-          categories.map((category) => (
-            <li class="inline-block">
-              <a
-                href={`/categories/${category}`}
-                class="rounded-lg bg-light px-4 py-2 text-dark transition hover:bg-primary hover:text-white flex items-center group"
-              >
-                <BiCategoryAlt className="mr-1 text-primary group-hover:text-white transition h-6 w-6 scale-75" />
+<Base title="categories" description="Browse writing by category.">
+  <div class="ds-container">
+    <section style="padding-top: var(--ds-space-7);">
+      <p class="grid-label" style="margin: 0 0 var(--ds-space-2);">categories</p>
+      <h1
+        style="margin: 0 0 var(--ds-space-3); font-size: var(--ds-fs-h1); font-family: var(--ds-font-display); letter-spacing: var(--ds-tracking-h1);"
+      >
+        browse by category
+      </h1>
+      <p class="ds-lede" style="margin: 0 0 var(--ds-space-6); max-width: 620px;">
+        Broader groupings than tags — useful for skimming whole topic areas.
+      </p>
+      {
+        categories.length === 0 ? (
+          <p class="ds-lede">No categories yet.</p>
+        ) : (
+          <div
+            style="display: flex; flex-wrap: wrap; gap: var(--ds-space-2); margin-bottom: var(--ds-space-8);"
+          >
+            {categories.map((category) => (
+              <a class="tag-chip" href={`/categories/${category}`}>
                 {humanize(category || "")}
               </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+            ))}
+          </div>
+        )
+      }
+    </section>
+  </div>
 </Base>

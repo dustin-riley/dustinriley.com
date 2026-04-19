@@ -1,5 +1,5 @@
 ---
-import dateFormat from "@/lib/utils/dateFormat";
+import { monthName, readMinutes } from "@/lib/utils/postMeta";
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
@@ -9,15 +9,6 @@ export interface Props {
 }
 
 const { posts, showAllLink = false, heading = "writing" } = Astro.props;
-
-const monthName = (d: Date) =>
-  d.toLocaleString("en-US", { month: "long", year: "numeric" });
-
-const readMinutes = (body: string | undefined) => {
-  const words = (body ?? "").trim().split(/\s+/).filter(Boolean).length;
-  const mins = Math.max(1, Math.round(words / 220));
-  return `${mins} min`;
-};
 ---
 
 <section>
@@ -27,9 +18,7 @@ const readMinutes = (body: string | undefined) => {
       posts.map((p) => (
         <li>
           <a class="writing-item" href={`/${p.id}`}>
-            <span class="date">
-              {p.data.date ? monthName(p.data.date) : ""}
-            </span>
+            <span class="date">{monthName(p.data.date)}</span>
             <span class="title">{p.data.title}</span>
             <span class="read-time">{readMinutes(p.body)}</span>
           </a>

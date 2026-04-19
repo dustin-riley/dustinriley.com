@@ -2,39 +2,33 @@
 import config from "@/config/config.json";
 import social from "@/config/social.json";
 import Base from "@/layouts/Base.astro";
+import { getEntry, render } from "astro:content";
+
+const entry = await getEntry("about", "-index");
+if (!entry) throw new Error("Missing about content at src/content/about/-index.md");
+const { Content } = await render(entry);
+const { title, meta_title, description } = entry.data;
 
 const githubUrl = social.github || "https://github.com/dustin-riley";
 const email = config.contactinfo.email;
 ---
 
-<Base title="about" description="A little about me.">
+<Base
+  title={meta_title ?? "about"}
+  description={description ?? "A little about me."}
+>
   <div class="ds-container">
     <article class="ds-article">
       <div class="article-meta">about</div>
-      <h1>Dustin Riley</h1>
+      <h1>{title}</h1>
       <div class="article-body">
-        <p>
-          Hey there, I'm Dustin! 👋 I'm an engineering manager at Vanta, where I
-          help build awesome teams that love to experiment, innovate, and have
-          fun along the way. I've had some great adventures at Elation Health,
-          Automox, and Eli Lilly—shaking up strategies, scaling teams, and
-          driving large scale products. I've even dabbled in freelance work,
-          cooking up everything from financial apps to AI-driven tools.
-        </p>
-        <p>
-          I studied computer science at Miami University and picked up some
-          Agile and ITIL skills along the way. This blog is where I share my
-          thoughts (and occasional rants!) on tech management, team building,
-          agile practices, and all the fun, messy stuff in between. Glad you're
-          here—grab a coffee and stick around!
-        </p>
+        <Content />
         <p>
           If you want to say hi, <a href={`mailto:${email}`}>email</a> is best. I'm
           also on
           <a href={githubUrl} rel="noopener noreferrer" target="_blank"
             >GitHub ↗</a
-          > and I keep an
-          <a href="/rss.xml">rss feed</a> of the writing here.
+          > and I keep an <a href="/rss.xml">rss feed</a> of the writing here.
         </p>
       </div>
     </article>

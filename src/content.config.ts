@@ -1,6 +1,16 @@
 import { defineCollection } from "astro:content";
 import { z } from "zod";
 
+// About collection schema
+const aboutCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    meta_title: z.string().optional(),
+    description: z.string().optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
 // Authors collection schema
 const authorsCollection = defineCollection({
   schema: z.object({
@@ -50,6 +60,7 @@ const pagesCollection = defineCollection({
 // Export collections
 export const collections = {
   posts: postsCollection,
+  about: aboutCollection,
   authors: authorsCollection,
   pages: pagesCollection,
 };

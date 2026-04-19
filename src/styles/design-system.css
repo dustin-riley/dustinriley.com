@@ -104,6 +104,25 @@ code {
   border: 1px solid var(--ds-border);
 }
 
+/* Inside <pre>, let the syntax-highlighter (Shiki) render its own theme. */
+pre code {
+  background: transparent;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+pre {
+  border-radius: var(--ds-radius-sm);
+  padding: var(--ds-space-4);
+  overflow-x: auto;
+  margin: var(--ds-space-4) 0;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
 /* ----- Layout ----- */
 .ds-container {
   max-width: 960px;

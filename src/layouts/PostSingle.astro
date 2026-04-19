@@ -57,9 +57,7 @@ const dateLabel = monthName(date);
 
   {
     similarPosts.length > 0 && (
-      <section
-        style="padding: var(--ds-space-7) 0 var(--ds-space-8); border-top: 1px solid var(--ds-border); margin-top: var(--ds-space-7);"
-      >
+      <section class="ds-related">
         <WritingList posts={similarPosts.slice(0, 3)} heading="related" />
       </section>
     )

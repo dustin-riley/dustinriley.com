@@ -23,15 +23,11 @@ const count = sortedPosts.length;
 
 <Base title={`category · ${title}`} description={`Posts in ${title}.`}>
   <div class="ds-container">
-    <section style="padding-top: var(--ds-space-7);">
-      <a href="/categories" style="font-family: var(--ds-font-body); font-size: 13px; color: var(--ds-text-muted); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; margin-bottom: var(--ds-space-4);">← all categories</a>
-      <p class="grid-label" style="margin: 0 0 var(--ds-space-2);">category</p>
-      <h1
-        style="margin: 0 0 var(--ds-space-3); font-size: var(--ds-fs-h1); font-family: var(--ds-font-display); letter-spacing: var(--ds-tracking-h1);"
-      >
-        {title}
-      </h1>
-      <p class="ds-lede" style="margin: 0 0 var(--ds-space-6); max-width: 620px;">
+    <section class="ds-page-header">
+      <a href="/categories" class="ds-back-link">← all categories</a>
+      <p class="grid-label">category</p>
+      <h1>{title}</h1>
+      <p class="ds-lede">
         {count} {count === 1 ? "post" : "posts"} in {title}.
       </p>
       <WritingList posts={sortedPosts} heading="" />

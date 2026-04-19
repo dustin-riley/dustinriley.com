@@ -5,12 +5,10 @@ import Base from "@/layouts/Base.astro";
 
 <Base title="experiments" description="Small interactive things I've built for fun.">
   <div class="ds-container">
-    <section style="padding-top: var(--ds-space-7);">
-      <p class="grid-label" style="margin: 0 0 var(--ds-space-2);">experiments</p>
-      <h1 style="margin: 0 0 var(--ds-space-3); font-size: var(--ds-fs-h1); font-family: var(--ds-font-display); letter-spacing: var(--ds-tracking-h1);">
-        small things, mostly for fun
-      </h1>
-      <p class="ds-lede" style="margin: 0 0 var(--ds-space-6); max-width: 620px;">
+    <section class="ds-page-header">
+      <p class="grid-label">experiments</p>
+      <h1>small things, mostly for fun</h1>
+      <p class="ds-lede">
         Interactive prototypes. Most started when a hobby and a weekend collided.
       </p>
       <ExperimentGrid />

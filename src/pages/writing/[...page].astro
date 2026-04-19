@@ -18,11 +18,9 @@ const pageTitle =
 
 <Base title={pageTitle} description="Notes, writeups, and thinking-out-loud.">
   <div class="ds-container">
-    <section style="padding-top: var(--ds-space-7);">
-      <p class="grid-label" style="margin: 0 0 var(--ds-space-2);">writing</p>
-      <h1
-        style="margin: 0 0 var(--ds-space-3); font-size: var(--ds-fs-h1); font-family: var(--ds-font-display); letter-spacing: var(--ds-tracking-h1);"
-      >
+    <section class="ds-page-header">
+      <p class="grid-label">writing</p>
+      <h1>
         {
           page.currentPage === 1
             ? "notes and writeups"
@@ -31,10 +29,7 @@ const pageTitle =
       </h1>
       {
         page.currentPage === 1 && (
-          <p
-            class="ds-lede"
-            style="margin: 0 0 var(--ds-space-6); max-width: 620px;"
-          >
+          <p class="ds-lede">
             Sporadic thinking-out-loud about the things I'm building, work, and
             life.
           </p>
@@ -43,12 +38,9 @@ const pageTitle =
       <WritingList posts={page.data} heading="" />
       {
         page.lastPage > 1 && (
-          <nav
-            style="display: flex; justify-content: space-between; font-family: var(--ds-font-mono); font-size: 12px; margin-top: var(--ds-space-5);"
-            aria-label="Pagination"
-          >
+          <nav class="ds-pager" aria-label="Pagination">
             <div>{page.url.prev && <a href={page.url.prev}>← newer</a>}</div>
-            <div style="color: var(--ds-text-muted);">
+            <div class="ds-pager-meta">
               page {page.currentPage} of {page.lastPage}
             </div>
             <div>{page.url.next && <a href={page.url.next}>older →</a>}</div>

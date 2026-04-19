@@ -8,23 +8,17 @@ const categories = await getTaxonomy("posts", "categories");
 
 <Base title="categories" description="Browse writing by category.">
   <div class="ds-container">
-    <section style="padding-top: var(--ds-space-7);">
-      <p class="grid-label" style="margin: 0 0 var(--ds-space-2);">categories</p>
-      <h1
-        style="margin: 0 0 var(--ds-space-3); font-size: var(--ds-fs-h1); font-family: var(--ds-font-display); letter-spacing: var(--ds-tracking-h1);"
-      >
-        browse by category
-      </h1>
-      <p class="ds-lede" style="margin: 0 0 var(--ds-space-6); max-width: 620px;">
+    <section class="ds-page-header">
+      <p class="grid-label">categories</p>
+      <h1>browse by category</h1>
+      <p class="ds-lede">
         Broader groupings than tags — useful for skimming whole topic areas.
       </p>
       {
         categories.length === 0 ? (
           <p class="ds-lede">No categories yet.</p>
         ) : (
-          <div
-            style="display: flex; flex-wrap: wrap; gap: var(--ds-space-2); margin-bottom: var(--ds-space-8);"
-          >
+          <div class="ds-chip-cloud">
             {categories.map((category) => (
               <a class="tag-chip" href={`/categories/${category}`}>
                 {humanize(category || "")}

@@ -520,6 +520,7 @@ pre {
   margin: 0 auto;
 }
 
+.ds-back-link,
 .ds-article .back {
   font-family: var(--ds-font-body);
   font-size: 13px;
@@ -528,9 +529,14 @@ pre {
   display: inline-flex;
   gap: 6px;
   align-items: center;
+  margin-bottom: var(--ds-space-4);
+}
+
+.ds-article .back {
   margin-bottom: var(--ds-space-5);
 }
 
+.ds-back-link:hover,
 .ds-article .back:hover {
   color: var(--ds-link);
 }
@@ -697,4 +703,62 @@ a.tag-chip:hover {
   background: var(--ds-bg);
   border-color: var(--ds-primary);
   box-shadow: 0 0 0 3px rgba(184, 84, 28, 0.15);
+}
+
+/* ----- Page header (eyebrow + h1 + lede) ----- */
+.ds-page-header {
+  padding-top: var(--ds-space-7);
+}
+
+.ds-page-header > .grid-label {
+  margin: 0 0 var(--ds-space-2);
+}
+
+.ds-page-header > h1 {
+  margin: 0 0 var(--ds-space-3);
+}
+
+.ds-page-header > .ds-lede {
+  margin: 0 0 var(--ds-space-6);
+  max-width: 620px;
+}
+
+/* ----- Chip cloud (taxonomy indexes) ----- */
+.ds-chip-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+  margin-bottom: var(--ds-space-8);
+}
+
+/* ----- Pager (prev · meta · next) ----- */
+.ds-pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--ds-font-mono);
+  font-size: 12px;
+  margin-top: var(--ds-space-5);
+}
+
+.ds-pager .ds-pager-meta {
+  color: var(--ds-text-muted);
+}
+
+/* ----- Related-posts block (follows an article) ----- */
+.ds-related {
+  padding: var(--ds-space-7) 0 var(--ds-space-8);
+  border-top: 1px solid var(--ds-border);
+  margin-top: var(--ds-space-7);
+}
+
+/* ----- Small mono note (inline meta text, "see all X →" etc.) ----- */
+.ds-mono-note {
+  font-family: var(--ds-font-mono);
+  font-size: 12px;
+  color: var(--ds-text-muted);
+}
+
+.ds-see-all {
+  margin-top: calc(var(--ds-space-4) * -1);
 }

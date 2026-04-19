@@ -1,9 +1,9 @@
 ---
-import Base from "@/layouts/Base.astro";
 import WritingList from "@/components/WritingList.astro";
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
-import config from "@/config/config.json";
 
 export async function getStaticPaths({ paginate }: any) {
   const posts = await getSinglePage("posts");
@@ -35,7 +35,7 @@ const pageTitle =
             class="ds-lede"
             style="margin: 0 0 var(--ds-space-6); max-width: 620px;"
           >
-            Sporatic thinking-out-loud about the things I'm building, work, and
+            Sporadic thinking-out-loud about the things I'm building, work, and
             life.
           </p>
         )
@@ -47,15 +47,11 @@ const pageTitle =
             style="display: flex; justify-content: space-between; font-family: var(--ds-font-mono); font-size: 12px; margin-top: var(--ds-space-5);"
             aria-label="Pagination"
           >
-            <div>
-              {page.url.prev && <a href={page.url.prev}>← newer</a>}
-            </div>
+            <div>{page.url.prev && <a href={page.url.prev}>← newer</a>}</div>
             <div style="color: var(--ds-text-muted);">
               page {page.currentPage} of {page.lastPage}
             </div>
-            <div>
-              {page.url.next && <a href={page.url.next}>older →</a>}
-            </div>
+            <div>{page.url.next && <a href={page.url.next}>older →</a>}</div>
           </nav>
         )
       }

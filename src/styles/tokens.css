@@ -1,9 +1,8 @@
 /* ============================================================
    Dustin Riley Design System — Colors & Type tokens
    Digital mid-century modern. Warm neutrals + restrained color.
+   Fonts are loaded via <link> tags in Base.astro.
    ============================================================ */
-
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
   /* Color: Warm Neutrals */

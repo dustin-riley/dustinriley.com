@@ -15,11 +15,12 @@ export async function GET(context) {
     title: "dustinriley — writing",
     description: config.metadata.meta_description,
     site: context.site ?? config.site.base_url,
+    trailingSlash: false,
     items: sorted.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description ?? "",
-      link: `/${post.id.replace(/\.(md|mdx)$/, "")}/`,
+      link: `/${post.id.replace(/\.(md|mdx)$/, "")}`,
       categories: [...(post.data.categories ?? []), ...(post.data.tags ?? [])],
     })),
     customData: `<language>en-us</language>`,

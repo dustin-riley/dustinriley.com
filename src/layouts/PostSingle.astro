@@ -1,5 +1,5 @@
 ---
-import dateFormat from "@/lib/utils/dateFormat";
+import WritingList from "@/components/WritingList.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import similerItems from "@/lib/utils/similarItems";
 import { markdownify, slugify, humanize } from "@/lib/utils/textConverter";
@@ -10,7 +10,7 @@ const posts = await getSinglePage("posts");
 const { post } = Astro.props;
 const similarPosts = similerItems(post, posts, post.slug);
 const { Content } = await render(post);
-const { title, image, date, tags, categories } = post.data;
+const { title, image, date, tags } = post.data;
 
 const readMinutes = (body: string | undefined) => {
   const words = (body ?? "").trim().split(/\s+/).filter(Boolean).length;
@@ -67,25 +67,7 @@ const monthName = date
       <section
         style="padding: var(--ds-space-7) 0 var(--ds-space-8); border-top: 1px solid var(--ds-border); margin-top: var(--ds-space-7);"
       >
-        <p class="grid-label">related</p>
-        <ul class="writing-list">
-          {similarPosts.slice(0, 3).map((p: any) => (
-            <li>
-              <a class="writing-item" href={`/${p.id}`}>
-                <span class="date">
-                  {p.data.date
-                    ? p.data.date.toLocaleString("en-US", {
-                        month: "long",
-                        year: "numeric",
-                      })
-                    : ""}
-                </span>
-                <span class="title">{p.data.title}</span>
-                <span class="read-time">{readMinutes(p.body)}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <WritingList posts={similarPosts.slice(0, 3)} heading="related" />
       </section>
     )
   }

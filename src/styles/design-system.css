@@ -325,12 +325,6 @@ pre {
   max-width: 560px;
 }
 
-.hero .cta-row {
-  margin-top: var(--ds-space-6);
-  display: flex;
-  gap: var(--ds-space-3);
-  flex-wrap: wrap;
-}
 
 /* ----- Section labels ----- */
 .grid-label {

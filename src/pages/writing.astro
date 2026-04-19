@@ -1,6 +1,6 @@
 ---
-import Base from "@/layouts/Base.astro";
 import WritingList from "@/components/WritingList.astro";
+import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 
@@ -16,8 +16,7 @@ const sortedPosts = sortByDate(posts);
         notes and writeups
       </h1>
       <p class="ds-lede" style="margin: 0 0 var(--ds-space-6); max-width: 620px;">
-        Longer-form thinking-out-loud about the things I'm building and the
-        hobbies pulling them in odd directions.
+        Sporatic thinking-out-loud about the things I'm building, work, and life.
       </p>
       <WritingList posts={sortedPosts} heading="" />
     </section>

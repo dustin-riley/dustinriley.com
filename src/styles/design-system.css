@@ -78,7 +78,7 @@ h3,
 }
 
 a {
-  color: var(--ds-primary);
+  color: var(--ds-link);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
@@ -86,7 +86,7 @@ a {
 }
 
 a:hover {
-  color: var(--ds-primary-hover);
+  color: var(--ds-link-hover);
 }
 
 code,
@@ -189,7 +189,7 @@ pre {
 }
 
 .site-nav a.nav-link.active {
-  color: var(--ds-primary);
+  color: var(--ds-link);
   background: var(--ds-surface);
 }
 
@@ -436,7 +436,7 @@ pre {
 }
 
 .writing-item:hover .title {
-  color: var(--ds-primary);
+  color: var(--ds-link);
 }
 
 .writing-item .date {
@@ -510,7 +510,7 @@ pre {
 }
 
 .site-footer a:hover {
-  color: var(--ds-primary);
+  color: var(--ds-link);
 }
 
 /* ----- Article ----- */
@@ -532,7 +532,7 @@ pre {
 }
 
 .ds-article .back:hover {
-  color: var(--ds-primary);
+  color: var(--ds-link);
 }
 
 .ds-article .article-meta {
@@ -610,7 +610,7 @@ pre {
 }
 
 .ds-article .article-body a {
-  color: var(--ds-primary);
+  color: var(--ds-link);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
@@ -646,7 +646,7 @@ pre {
 }
 
 .ds-article .tag-chip:hover {
-  color: var(--ds-primary);
+  color: var(--ds-link);
   background: var(--ds-surface-sunken);
 }
 
@@ -667,7 +667,7 @@ a.tag-chip {
 }
 
 a.tag-chip:hover {
-  color: var(--ds-primary);
+  color: var(--ds-link);
   background: var(--ds-surface-sunken);
 }
 

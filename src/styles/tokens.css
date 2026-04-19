@@ -13,10 +13,17 @@
   --ds-text: #1f1a14;
   --ds-text-muted: #6b5f50;
 
-  /* Color: Primary (burnt orange) */
+  /* Color: Primary (burnt orange) — used for surfaces, buttons, the brand mark.
+     --ds-primary itself does NOT meet 4.5:1 against --ds-bg, so for
+     text-as-brand (links, active nav, hover titles) use --ds-link instead. */
   --ds-primary: #b8541c;
   --ds-primary-hover: #9e4615;
   --ds-primary-pressed: #85390f;
+
+  /* Color: Link — darker burnt orange shades that clear WCAG AA (~5.9:1
+     and ~7.5:1 respectively) on both --ds-bg and --ds-surface. */
+  --ds-link: #9e4615;
+  --ds-link-hover: #85390f;
 
   /* Color: Accents */
   --ds-accent-ochre: #c9922b;

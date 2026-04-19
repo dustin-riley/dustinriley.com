@@ -1,6 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
-import Posts from "@/layouts/Posts.astro";
+import WritingList from "@/components/WritingList.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
@@ -9,29 +9,28 @@ import { humanize } from "@/lib/utils/textConverter";
 
 export async function getStaticPaths() {
   const tags = await getTaxonomy("posts", "tags");
-
-  return tags.map((tag) => {
-    return {
-      params: { tag },
-    };
-  });
+  return tags.map((tag) => ({ params: { tag } }));
 }
 
 const { tag } = Astro.params;
-
 const posts = await getSinglePage("posts");
-const filterByTags = taxonomyFilter(posts, "tags", tag);
-const sortedPosts = sortByDate(filterByTags);
+const filtered = taxonomyFilter(posts, "tags", tag);
+const sortedPosts = sortByDate(filtered);
 
 const title = humanize(tag || "");
+const count = sortedPosts.length;
 ---
 
-<Base title={title || "Tag"}>
-  <div class="section">
-    <div class="container">
-      <p class="text-center text-2xl mb-4">Showing Posts From</p>
-      <h1 class="h2 mb-16 text-center text-primary">{title}</h1>
-      <Posts posts={sortedPosts} fluid={false} />
-    </div>
+<Base title={`tag · ${title}`} description={`Posts tagged ${title}.`}>
+  <div class="ds-container">
+    <section class="ds-page-header">
+      <a href="/tags" class="ds-back-link">← all tags</a>
+      <p class="grid-label">tag</p>
+      <h1>#{title}</h1>
+      <p class="ds-lede">
+        {count} {count === 1 ? "post" : "posts"} tagged {title}.
+      </p>
+      <WritingList posts={sortedPosts} heading="" />
+    </section>
   </div>
 </Base>

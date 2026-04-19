@@ -1,0 +1,47 @@
+---
+import experimentsData from "@/config/experiments.json";
+
+interface Experiment {
+  slug: string;
+  tag: string;
+  title: string;
+  description: string;
+  year: string;
+  kind: string;
+  url: string;
+  external?: boolean;
+}
+
+const experiments = experimentsData as Experiment[];
+---
+
+<section>
+  <h2 class="grid-label">experiments</h2>
+  <div class="experiment-grid">
+    {
+      experiments.map((x) => (
+        <a
+          class="experiment-card"
+          href={x.url}
+          rel={x.external ? "noopener noreferrer" : undefined}
+          target={x.external ? "_blank" : undefined}
+        >
+          <div class="tag">{x.tag}</div>
+          <h3>{x.title}</h3>
+          <p class="desc">{x.description}</p>
+          <div class="meta">
+            <span>{x.year}</span>
+            <span>·</span>
+            <span>{x.kind}</span>
+            {x.external && (
+              <>
+                <span>·</span>
+                <span>↗</span>
+              </>
+            )}
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  
+  <circle cx="40" cy="40" r="22" fill="#B8541C"></circle>
+  <circle cx="52" cy="32" r="6" fill="#FAF6F0"></circle>
+  <text x="76" y="52" class="w" font-size="32" fill="#1F1A14">dustinriley</text>
+</svg>

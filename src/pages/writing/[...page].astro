@@ -1,0 +1,55 @@
+---
+import WritingList from "@/components/WritingList.astro";
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const posts = await getSinglePage("posts");
+  const sorted = sortByDate(posts);
+  return paginate(sorted, { pageSize: config.settings.pagination });
+};
+
+type Props = { page: Page<CollectionEntry<"posts">> };
+const { page } = Astro.props as Props;
+const pageTitle =
+  page.currentPage === 1 ? "writing" : `writing · page ${page.currentPage}`;
+---
+
+<Base title={pageTitle} description="Notes, writeups, and thinking-out-loud.">
+  <div class="ds-container">
+    <section class="ds-page-header">
+      <p class="grid-label">writing</p>
+      <h1>
+        {
+          page.currentPage === 1
+            ? "notes and writeups"
+            : `page ${page.currentPage} of ${page.lastPage}`
+        }
+      </h1>
+      {
+        page.currentPage === 1 && (
+          <p class="ds-lede">
+            Sporadic thinking-out-loud about the things I'm building, work, and
+            life.
+          </p>
+        )
+      }
+      <WritingList posts={page.data} heading="" />
+      {
+        page.lastPage > 1 && (
+          <nav class="ds-pager" aria-label="Pagination">
+            <div>{page.url.prev && <a href={page.url.prev}>← newer</a>}</div>
+            <div class="ds-pager-meta">
+              page {page.currentPage} of {page.lastPage}
+            </div>
+            <div>{page.url.next && <a href={page.url.next}>older →</a>}</div>
+          </nav>
+        )
+      }
+    </section>
+  </div>
+</Base>

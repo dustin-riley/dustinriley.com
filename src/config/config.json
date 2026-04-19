@@ -1,30 +1,29 @@
 {
   "site": {
-    "title": "Dustin Riley | My Blog",
+    "title": "dustinriley",
     "base_url": "https://dustinriley.com",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/favicon.ico",
+    "favicon": "/favicon.svg",
     "logo": "",
     "logo_width": "200",
     "logo_height": "34",
-    "logo_text": "dustinriley.com"
+    "logo_text": "dustinriley"
   },
 
   "settings": {
-    "pagination": 5,
+    "pagination": 10,
     "summary_length": 100
   },
 
   "metadata": {
     "meta_author": "Dustin Riley",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Software engineering insights, data visualization projects, and technical explorations by Dustin Riley"
+    "meta_description": "I build small things at the edges of software and whatever hobby I'm deep in this month."
   },
 
   "params": {
-    "contact_form_action": "#",
-    "copyright": "Copyright © 2025 Dustin Riley. All rights reserved."
+    "copyright": "© 2026 Dustin Riley"
   },
 
   "contactinfo": {

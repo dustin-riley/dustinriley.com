@@ -1,0 +1,18 @@
+---
+export interface Props {
+  headline?: string;
+  lede?: string;
+}
+
+const {
+  headline = "I'm Dustin. I build small things at the intersection of software and whatever hobby I'm deep in this month.",
+  lede = "Mostly for fun. Occasionally useful. Potentially a little unfinished.",
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class="blob-1" aria-hidden="true"></div>
+  <div class="blob-2" aria-hidden="true"></div>
+  <h1 class="ds-display">{headline}</h1>
+  <p class="lede">{lede}</p>
+</section>

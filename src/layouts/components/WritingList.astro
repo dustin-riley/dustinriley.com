@@ -1,0 +1,36 @@
+---
+import { monthName, readMinutes } from "@/lib/utils/postMeta";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  posts: CollectionEntry<"posts">[];
+  showAllLink?: boolean;
+  heading?: string;
+}
+
+const { posts, showAllLink = false, heading = "writing" } = Astro.props;
+---
+
+<section>
+  <h2 class="grid-label">{heading}</h2>
+  <ul class="writing-list">
+    {
+      posts.map((p) => (
+        <li>
+          <a class="writing-item" href={`/${p.id}`}>
+            <span class="date">{monthName(p.data.date)}</span>
+            <span class="title">{p.data.title}</span>
+            <span class="read-time">{readMinutes(p.body)}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  {
+    showAllLink && (
+      <p class="ds-mono-note ds-see-all">
+        <a href="/writing">see all writing →</a>
+      </p>
+    )
+  }
+</section>

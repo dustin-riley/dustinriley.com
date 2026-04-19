@@ -4,29 +4,29 @@ import { getTaxonomy } from "@/lib/taxonomyParser.astro";
 import { humanize } from "@/lib/utils/textConverter";
 
 const categories = await getTaxonomy("posts", "categories");
-
-import { BiCategoryAlt } from "react-icons/bi";
 ---
 
-<Base title={"Categories"}>
-  <section class="section">
-    <div class="container text-center">
-      <h1 class="h2 page-heading">Categories</h1>
-      <ul class="space-x-4">
-        {
-          categories.map((category) => (
-            <li class="inline-block">
-              <a
-                href={`/categories/${category}`}
-                class="rounded-lg bg-light px-4 py-2 text-dark transition hover:bg-primary hover:text-white flex items-center group"
-              >
-                <BiCategoryAlt className="mr-1 text-primary group-hover:text-white transition h-6 w-6 scale-75" />
+<Base title="categories" description="Browse writing by category.">
+  <div class="ds-container">
+    <section class="ds-page-header">
+      <p class="grid-label">categories</p>
+      <h1>browse by category</h1>
+      <p class="ds-lede">
+        Broader groupings than tags — useful for skimming whole topic areas.
+      </p>
+      {
+        categories.length === 0 ? (
+          <p class="ds-lede">No categories yet.</p>
+        ) : (
+          <div class="ds-chip-cloud">
+            {categories.map((category) => (
+              <a class="tag-chip" href={`/categories/${category}`}>
                 {humanize(category || "")}
               </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+            ))}
+          </div>
+        )
+      }
+    </section>
+  </div>
 </Base>

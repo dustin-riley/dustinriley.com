@@ -1,21 +1,18 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { markdownify } from "@/lib/utils/textConverter";
-import type { CollectionEntry } from "astro:content";
-import { getEntry, render } from "astro:content";
-const entry = (await getEntry("pages", "404")) as CollectionEntry<"pages">;
-const { Content } = await render(entry);
 ---
 
-<Base title={entry.data.title}>
-  <section class="section">
-    <div class="container">
-      <div class="flex h-[40vh] items-center justify-center">
-        <div class="text-center">
-          <h1 class="mb-4" set:html={markdownify(entry.data.title)} />
-          <Content />
-        </div>
+<Base title="not found">
+  <div class="ds-container">
+    <article class="ds-article" style="text-align: center;">
+      <div class="article-meta">404</div>
+      <h1>That page isn't around.</h1>
+      <div class="article-body">
+        <p>Maybe it never was. Or maybe I moved it and forgot to leave a forwarding address.</p>
+        <p>
+          <a href="/" class="ds-btn ds-btn-secondary">← back home</a>
+        </p>
       </div>
-    </div>
-  </section>
+    </article>
+  </div>
 </Base>

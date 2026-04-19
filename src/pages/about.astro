@@ -1,62 +1,36 @@
 ---
+import config from "@/config/config.json";
+import social from "@/config/social.json";
 import Base from "@/layouts/Base.astro";
-import { markdownify } from "@/lib/utils/textConverter";
-import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
 import { getEntry, render } from "astro:content";
 
-const entry = (await getEntry("about", "-index")) as CollectionEntry<"about">;
+const entry = await getEntry("about", "-index");
+if (!entry) throw new Error("Missing about content at src/content/about/-index.md");
 const { Content } = await render(entry);
-const { title, meta_title, image, what_i_do } = entry.data;
+const { title, meta_title, description } = entry.data;
+
+const githubUrl = social.github || "https://github.com/dustin-riley";
+const email = config.contactinfo.email;
 ---
 
-<Base title={title} meta_title={meta_title} image={image}>
-  <section class="section">
-    <div class="container">
-      <div class="row md:gx-4">
-        <div class="sm:col-5 md:col-4">
-          {
-            image && (
-              <div class="img-cover mb-8">
-                <Image
-                  src={image}
-                  width={295}
-                  height={395}
-                  alt={title}
-                  class="rounded-lg w-full"
-                />
-              </div>
-            )
-          }
-        </div>
-        <div class="sm:col-7 md:col-8">
-          <h1 set:html={markdownify(title)} class="h3 mb-8" />
-
-          <div class="content">
-            <Content />
-          </div>
-          <a href="/contact" class="btn btn-primary text-white py-2"
-            >Get In Touch</a
-          >
-        </div>
+<Base
+  title={meta_title ?? "about"}
+  description={description ?? "A little about me."}
+>
+  <div class="ds-container">
+    <article class="ds-article">
+      <div class="article-meta">about</div>
+      <h1>{title}</h1>
+      <div class="article-body">
+        <Content />
+        <p>
+          If you want to say hi, <a href={`mailto:${email}`}>email</a> is best. I'm
+          also on
+          <a href={githubUrl} rel="noopener noreferrer" target="_blank"
+            >GitHub ↗</a
+          > and I keep an <a href="/rss.xml">rss feed</a> of the writing here.
+        </p>
       </div>
-    </div>
-  </section>
-
-  <section class="section pt-0">
-    <div class="container">
-      <h3 class="page-heading mb-20">{what_i_do.title}</h3>
-      <div class="row justify-center gy-4 text-center">
-        {
-          what_i_do.items.map((item: any) => (
-            <div class="lg:col-4 md:col-6">
-              <i class="{{.icon}} fa-3x text-primary mb-4" />
-              <h4 class="text-dark font-weight-700 mb-3">{item.title}</h4>
-              <p>{item.description}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+    </article>
+  </div>
 </Base>

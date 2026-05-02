@@ -192,10 +192,6 @@
 }
 .tl-chip[data-cat="personal"],
 .tl-entry[data-cat="personal"] {
-  --cat: var(--ds-accent-sage);
-}
-.tl-chip[data-cat="hobby"],
-.tl-entry[data-cat="hobby"] {
   --cat: var(--ds-accent-plum);
 }
 
@@ -203,8 +199,7 @@
 [data-active-cats~="work"] .tl-chip[data-cat="work"],
 [data-active-cats~="education"] .tl-chip[data-cat="education"],
 [data-active-cats~="side"] .tl-chip[data-cat="side"],
-[data-active-cats~="personal"] .tl-chip[data-cat="personal"],
-[data-active-cats~="hobby"] .tl-chip[data-cat="hobby"] {
+[data-active-cats~="personal"] .tl-chip[data-cat="personal"] {
   opacity: 1;
   color: var(--ds-text);
   background: var(--ds-surface);
@@ -214,8 +209,7 @@
 [data-active-cats~="work"] .tl-chip[data-cat="work"] .swatch,
 [data-active-cats~="education"] .tl-chip[data-cat="education"] .swatch,
 [data-active-cats~="side"] .tl-chip[data-cat="side"] .swatch,
-[data-active-cats~="personal"] .tl-chip[data-cat="personal"] .swatch,
-[data-active-cats~="hobby"] .tl-chip[data-cat="hobby"] .swatch {
+[data-active-cats~="personal"] .tl-chip[data-cat="personal"] .swatch {
   background: var(--cat);
 }
 
@@ -230,7 +224,6 @@
   border-radius: var(--ds-radius-md);
   padding: var(--ds-space-4) var(--ds-space-5);
   transition: all var(--ds-duration-base) var(--ds-ease-standard);
-  cursor: default;
 }
 
 .tl-card .row1 {
@@ -357,8 +350,7 @@
 [data-active-cats~="work"] .tl-entry[data-cat="work"],
 [data-active-cats~="education"] .tl-entry[data-cat="education"],
 [data-active-cats~="side"] .tl-entry[data-cat="side"],
-[data-active-cats~="personal"] .tl-entry[data-cat="personal"],
-[data-active-cats~="hobby"] .tl-entry[data-cat="hobby"] {
+[data-active-cats~="personal"] .tl-entry[data-cat="personal"] {
   display: block;
 }
 
@@ -370,8 +362,7 @@
 [data-active-cats~="work"] .year-block:has(.tl-entry[data-cat="work"]),
 [data-active-cats~="education"] .year-block:has(.tl-entry[data-cat="education"]),
 [data-active-cats~="side"] .year-block:has(.tl-entry[data-cat="side"]),
-[data-active-cats~="personal"] .year-block:has(.tl-entry[data-cat="personal"]),
-[data-active-cats~="hobby"] .year-block:has(.tl-entry[data-cat="hobby"]) {
+[data-active-cats~="personal"] .year-block:has(.tl-entry[data-cat="personal"]) {
   display: grid;
 }
 

@@ -11,14 +11,15 @@ type TimelineEntry = {
   date: string;
   year: number;
   sortKey: number;
-  category: "work" | "education" | "side" | "personal" | "hobby";
+  category: "work" | "education" | "side" | "personal";
   title: string;
   org?: string;
   blurb?: string;
 };
 
 const entry = await getEntry("about", "about");
-if (!entry) throw new Error("Missing about content at src/content/about/about.md");
+if (!entry)
+  throw new Error("Missing about content at src/content/about/about.md");
 const { Content } = await render(entry);
 const { meta_title, description } = entry.data;
 
@@ -27,13 +28,12 @@ const categories = [
   { key: "education", label: "education" },
   { key: "side", label: "side projects" },
   { key: "personal", label: "personal" },
-  { key: "hobby", label: "hobbies" },
 ] as const;
 
 const allCats = categories.map((c) => c.key).join(" ");
 
 const sorted = [...(timeline.entries as TimelineEntry[])].sort(
-  (a, b) => b.sortKey - a.sortKey
+  (a, b) => b.sortKey - a.sortKey,
 );
 
 const yearGroups: { year: number; sub: string; items: TimelineEntry[] }[] = [];
@@ -71,7 +71,7 @@ const catLabel = (key: string) =>
           widths={[220, 440, 660]}
           sizes="(max-width: 720px) 180px, 220px"
         />
-        <figcaption>October 2024</figcaption>
+        <figcaption>Me</figcaption>
       </figure>
       <div class="about-intro">
         <div class="meta">about</div>
@@ -92,11 +92,7 @@ const catLabel = (key: string) =>
             {total} of {total} moments
           </span>
         </div>
-        <div
-          class="tl-filters"
-          role="group"
-          aria-label="filter by category"
-        >
+        <div class="tl-filters" role="group" aria-label="filter by category">
           {
             categories.map((c) => (
               <button

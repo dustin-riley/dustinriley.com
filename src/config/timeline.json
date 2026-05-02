@@ -1,0 +1,222 @@
+{
+  "entries": [
+    {
+      "id": "vanta-em-2",
+      "date": "April 2026",
+      "year": 2026,
+      "sortKey": 202604,
+      "category": "work",
+      "title": "Promoted to senior engineering manager at Vanta",
+      "org": "Vanta",
+      "blurb": "Took on a second team. Spending more time on hiring loops, less on PRs — and somehow more on the Figma file."
+    },
+    {
+      "id": "sourdough-2026",
+      "date": "February 2026",
+      "year": 2026,
+      "sortKey": 202602,
+      "category": "hobby",
+      "title": "First sourdough loaf I would actually serve to a guest",
+      "blurb": "Year three of the bread project. Open crumb, blistered crust, no gym-mat aftertaste. Recipe lives in my notes app."
+    },
+    {
+      "id": "scorigami",
+      "date": "November 2025",
+      "year": 2025,
+      "sortKey": 202511,
+      "category": "side",
+      "title": "Shipped the college football scorigami visualization",
+      "blurb": "A heatmap of every final score that has ever happened in CFB. Wrote it up for the blog. People emailed."
+    },
+    {
+      "id": "leadville",
+      "date": "August 2025",
+      "year": 2025,
+      "sortKey": 202508,
+      "category": "personal",
+      "title": "Finished the Leadville Trail 100 MTB",
+      "blurb": "Twelve hours, two bonks, one rebuilt rear derailleur. Would do it again. Probably."
+    },
+    {
+      "id": "site-rebuild",
+      "date": "May 2025",
+      "year": 2025,
+      "sortKey": 202505,
+      "category": "side",
+      "title": "Rebuilt this site in Astro",
+      "blurb": "Migrated off the old stack. Wanted something tiny, fast, and fun to fork experiments into."
+    },
+    {
+      "id": "vanta-start",
+      "date": "October 2024",
+      "year": 2024,
+      "sortKey": 202410,
+      "category": "work",
+      "title": "Joined Vanta as an engineering manager",
+      "org": "Vanta",
+      "blurb": "Building teams that experiment, ship, and have fun doing it. Compliance is more interesting than it sounds."
+    },
+    {
+      "id": "colorado-move",
+      "date": "June 2024",
+      "year": 2024,
+      "sortKey": 202406,
+      "category": "personal",
+      "title": "Moved to Colorado",
+      "blurb": "Closer to mountains, farther from humidity. The cycling-to-rest-day ratio has shifted."
+    },
+    {
+      "id": "elation-end",
+      "date": "September 2023",
+      "year": 2023,
+      "sortKey": 202309,
+      "category": "work",
+      "title": "Wrapped up at Elation Health",
+      "org": "Elation Health",
+      "blurb": "Three years driving product strategy and scaling the platform team. Left with a real fondness for the EHR space."
+    },
+    {
+      "id": "route-tool",
+      "date": "March 2023",
+      "year": 2023,
+      "sortKey": 202303,
+      "category": "side",
+      "title": "Built the elevation-first bike route planner",
+      "blurb": "A tiny tool for planning rides by climb instead of distance. Still my most-used personal project."
+    },
+    {
+      "id": "cycling-start",
+      "date": "Spring 2022",
+      "year": 2022,
+      "sortKey": 202204,
+      "category": "hobby",
+      "title": "Bought a gravel bike, became insufferable about it",
+      "blurb": "The hobby that ate every weekend morning. No regrets."
+    },
+    {
+      "id": "purdue-cyber",
+      "date": "December 2021",
+      "year": 2021,
+      "sortKey": 202112,
+      "category": "education",
+      "title": "Completed the Purdue cybersecurity program",
+      "org": "Purdue University",
+      "blurb": "Twelve weeks of threat modeling, incident response, and accidentally locking myself out of my own lab VMs."
+    },
+    {
+      "id": "freelance",
+      "date": "2021 — ongoing",
+      "year": 2021,
+      "sortKey": 202106,
+      "category": "side",
+      "title": "Started taking on freelance projects on the side",
+      "blurb": "Financial dashboards, an early LLM-powered writing assistant, a couple of internal tools. Mostly fun, occasionally instructive."
+    },
+    {
+      "id": "elation-start",
+      "date": "October 2020",
+      "year": 2020,
+      "sortKey": 202010,
+      "category": "work",
+      "title": "Joined Elation Health",
+      "org": "Elation Health",
+      "blurb": "Came in to help with a strategic pivot. Stayed for the team. Learned that healthcare software is mostly a people problem."
+    },
+    {
+      "id": "itil",
+      "date": "August 2019",
+      "year": 2019,
+      "sortKey": 201908,
+      "category": "education",
+      "title": "Picked up ITIL Foundation",
+      "blurb": "A management cert with surprisingly useful vocabulary. Learned to say \"service catalog\" with a straight face."
+    },
+    {
+      "id": "automox-end",
+      "date": "May 2019",
+      "year": 2019,
+      "sortKey": 201905,
+      "category": "work",
+      "title": "Left Automox",
+      "org": "Automox",
+      "blurb": "Two years scaling the engineering org from a dozen to north of fifty. Shipped a lot, slept less."
+    },
+    {
+      "id": "agile-cert",
+      "date": "November 2018",
+      "year": 2018,
+      "sortKey": 201811,
+      "category": "education",
+      "title": "Earned Certified Scrum Professional",
+      "blurb": "After enough retrospectives, the certification mostly confirmed what the team had already taught me."
+    },
+    {
+      "id": "automox-start",
+      "date": "June 2017",
+      "year": 2017,
+      "sortKey": 201706,
+      "category": "work",
+      "title": "Joined Automox as an early engineering hire",
+      "org": "Automox",
+      "blurb": "Endpoint management, a tiny team, a lot of greenfield. The \"do it yourself\" era of my career."
+    },
+    {
+      "id": "lilly-end",
+      "date": "April 2015",
+      "year": 2015,
+      "sortKey": 201504,
+      "category": "work",
+      "title": "Left Eli Lilly",
+      "org": "Eli Lilly",
+      "blurb": "Three years inside a pharma giant taught me how slow systems move and where to push."
+    },
+    {
+      "id": "lilly-start",
+      "date": "July 2012",
+      "year": 2012,
+      "sortKey": 201207,
+      "category": "work",
+      "title": "Started at Eli Lilly",
+      "org": "Eli Lilly",
+      "blurb": "First job out of school. Internal tools, regulated data, fluorescent lighting."
+    },
+    {
+      "id": "miami-grad",
+      "date": "May 2012",
+      "year": 2012,
+      "sortKey": 201205,
+      "category": "education",
+      "title": "BS in Computer Science, Miami University",
+      "org": "Miami University",
+      "blurb": "Four years of late nights in Benton Hall. Met most of my closest friends here."
+    },
+    {
+      "id": "miami-start",
+      "date": "August 2008",
+      "year": 2008,
+      "sortKey": 200808,
+      "category": "education",
+      "title": "Started at Miami University",
+      "org": "Miami University",
+      "blurb": "Showed up undeclared. Took an intro to programming on a whim and never really stopped."
+    },
+    {
+      "id": "first-site",
+      "date": "2007",
+      "year": 2007,
+      "sortKey": 200706,
+      "category": "hobby",
+      "title": "Built my first website on a hand-me-down laptop",
+      "blurb": "Notepad, a pirated copy of Photoshop, and a Geocities account. Looked terrible. Felt like magic."
+    }
+  ],
+  "yearSubtitles": {
+    "2026": "this year",
+    "2025": "last year",
+    "2024": "colorado",
+    "2020": "pivot",
+    "2017": "the rockies",
+    "2012": "first job",
+    "2008": "oxford, oh"
+  }
+}

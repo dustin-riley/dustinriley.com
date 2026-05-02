@@ -1,0 +1,415 @@
+/* ============================================================
+   About page — header + timeline (year rail layout)
+   Ported from design_handoff_about_timeline prototype.
+   ============================================================ */
+
+/* ----- Page header ----- */
+.about-header {
+  position: relative;
+  padding: var(--ds-space-9) 0 var(--ds-space-7);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--ds-space-7);
+  align-items: start;
+}
+
+.about-header .blob {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(184, 84, 28, 0.18),
+    transparent 70%
+  );
+  top: -80px;
+  right: -100px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-header .blob-2 {
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(
+    circle,
+    rgba(46, 125, 122, 0.14),
+    transparent 70%
+  );
+  top: 60px;
+  right: 40%;
+}
+
+.about-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ----- Polaroid (restyled for new layout) ----- */
+.polaroid {
+  padding: 12px 12px 40px;
+  background: var(--ds-bg);
+  border: 1px solid var(--ds-border);
+  box-shadow: var(--ds-shadow-md);
+  transform: rotate(-2.5deg);
+  transition: transform var(--ds-duration-slow) var(--ds-ease-standard);
+  width: 100%;
+  max-width: 220px;
+  align-self: start;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg);
+}
+
+.polaroid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: var(--ds-surface-sunken);
+}
+
+.polaroid figcaption {
+  margin-top: 12px;
+  text-align: center;
+  font-family: var(--ds-font-mono);
+  font-size: 11px;
+  color: var(--ds-text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ----- About intro copy ----- */
+.about-intro .meta {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-fs-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ds-text-muted);
+  margin-bottom: var(--ds-space-3);
+}
+
+.about-intro h1 {
+  margin: 0 0 var(--ds-space-4);
+  font-size: var(--ds-fs-display);
+  line-height: var(--ds-lh-display);
+  letter-spacing: var(--ds-tracking-display);
+}
+
+.about-intro p {
+  font-size: var(--ds-fs-body-lg);
+  line-height: 1.55;
+  color: var(--ds-text);
+  max-width: 52ch;
+  margin: 0 0 var(--ds-space-3);
+}
+
+.about-intro p + p {
+  color: var(--ds-text-muted);
+}
+
+/* ----- Timeline header ----- */
+.tl-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-space-4);
+  padding: var(--ds-space-6) 0 var(--ds-space-5);
+  border-top: 1px solid var(--ds-border);
+}
+
+.tl-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-3);
+}
+
+.tl-title h2 {
+  margin: 0;
+  font-size: var(--ds-fs-h2);
+}
+
+.tl-title .count {
+  font-family: var(--ds-font-mono);
+  font-size: 12px;
+  color: var(--ds-text-muted);
+}
+
+/* ----- Filter chips ----- */
+.tl-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tl-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ds-font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 6px 12px 6px 10px;
+  border-radius: var(--ds-radius-pill);
+  border: 1px solid var(--ds-border);
+  background: var(--ds-bg);
+  color: var(--ds-text-muted);
+  cursor: pointer;
+  transition: all var(--ds-duration-fast) var(--ds-ease-standard);
+  user-select: none;
+  opacity: 0.55;
+}
+
+.tl-chip .swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ds-border);
+  flex: none;
+}
+
+.tl-chip:hover {
+  color: var(--ds-text);
+  border-color: var(--ds-text-muted);
+}
+
+/* ----- Category color tokens (per data-cat) ----- */
+.tl-chip[data-cat="work"],
+.tl-entry[data-cat="work"] {
+  --cat: var(--ds-primary);
+}
+.tl-chip[data-cat="education"],
+.tl-entry[data-cat="education"] {
+  --cat: var(--ds-accent-teal);
+}
+.tl-chip[data-cat="side"],
+.tl-entry[data-cat="side"] {
+  --cat: var(--ds-accent-ochre);
+}
+.tl-chip[data-cat="personal"],
+.tl-entry[data-cat="personal"] {
+  --cat: var(--ds-success);
+}
+.tl-chip[data-cat="hobby"],
+.tl-entry[data-cat="hobby"] {
+  --cat: var(--ds-accent-plum);
+}
+
+/* ----- Filter state: active chips (chip's category is in active set) ----- */
+[data-active-cats~="work"] .tl-chip[data-cat="work"],
+[data-active-cats~="education"] .tl-chip[data-cat="education"],
+[data-active-cats~="side"] .tl-chip[data-cat="side"],
+[data-active-cats~="personal"] .tl-chip[data-cat="personal"],
+[data-active-cats~="hobby"] .tl-chip[data-cat="hobby"] {
+  opacity: 1;
+  color: var(--ds-text);
+  background: var(--ds-surface);
+  border-color: var(--ds-text);
+}
+
+[data-active-cats~="work"] .tl-chip[data-cat="work"] .swatch,
+[data-active-cats~="education"] .tl-chip[data-cat="education"] .swatch,
+[data-active-cats~="side"] .tl-chip[data-cat="side"] .swatch,
+[data-active-cats~="personal"] .tl-chip[data-cat="personal"] .swatch,
+[data-active-cats~="hobby"] .tl-chip[data-cat="hobby"] .swatch {
+  background: var(--cat);
+}
+
+/* ----- Common entry styling ----- */
+.tl-entry {
+  position: relative;
+}
+
+.tl-card {
+  background: var(--ds-bg);
+  border: 1px solid transparent;
+  border-radius: var(--ds-radius-md);
+  padding: var(--ds-space-4) var(--ds-space-5);
+  transition: all var(--ds-duration-base) var(--ds-ease-standard);
+  cursor: default;
+}
+
+.tl-card .row1 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-3);
+  flex-wrap: wrap;
+}
+
+.tl-date {
+  font-family: var(--ds-font-mono);
+  font-size: 12px;
+  color: var(--ds-text-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.tl-cat-tag {
+  font-family: var(--ds-font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cat);
+  font-weight: 500;
+}
+
+.tl-title-text {
+  font-family: var(--ds-font-display);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 4px 0 0;
+  color: var(--ds-text);
+}
+
+.tl-blurb {
+  margin: var(--ds-space-2) 0 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ds-text-muted);
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+
+/* ============================================================
+   Year rail layout
+   ============================================================ */
+.tl-yearrail {
+  position: relative;
+}
+
+.tl-yearrail .year-block {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: var(--ds-space-5);
+  margin-bottom: var(--ds-space-7);
+  position: relative;
+}
+
+.tl-yearrail .year-label {
+  font-family: var(--ds-font-display);
+  font-weight: 600;
+  color: var(--ds-text);
+  letter-spacing: -0.01em;
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  padding-top: 10px;
+}
+
+.tl-yearrail .year-label .year-num {
+  display: block;
+  font-size: 28px;
+}
+
+.tl-yearrail .year-label .year-sub {
+  display: block;
+  font-family: var(--ds-font-mono);
+  font-size: 11px;
+  color: var(--ds-text-muted);
+  font-weight: 400;
+  margin-top: 2px;
+  letter-spacing: 0;
+}
+
+.tl-yearrail .year-entries {
+  position: relative;
+  border-left: 1px solid var(--ds-border);
+  padding-left: var(--ds-space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-3);
+}
+
+.tl-yearrail .tl-entry::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--ds-space-5) * -1 - 5px);
+  top: 22px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cat);
+  border: 2px solid var(--ds-bg);
+  box-shadow: 0 0 0 1px var(--cat);
+  z-index: 1;
+}
+
+.tl-yearrail .tl-entry {
+  padding-left: 0;
+}
+
+/* ============================================================
+   Filter visibility — hide entries whose category isn't active
+   ============================================================ */
+/* Default: hide all entries (overridden when category is in data-active-cats) */
+.tl-yearrail .tl-entry {
+  display: none;
+}
+
+[data-active-cats~="work"] .tl-entry[data-cat="work"],
+[data-active-cats~="education"] .tl-entry[data-cat="education"],
+[data-active-cats~="side"] .tl-entry[data-cat="side"],
+[data-active-cats~="personal"] .tl-entry[data-cat="personal"],
+[data-active-cats~="hobby"] .tl-entry[data-cat="hobby"] {
+  display: block;
+}
+
+/* Hide year blocks with no visible entries */
+.tl-yearrail .year-block {
+  display: none;
+}
+
+[data-active-cats~="work"] .year-block:has(.tl-entry[data-cat="work"]),
+[data-active-cats~="education"] .year-block:has(.tl-entry[data-cat="education"]),
+[data-active-cats~="side"] .year-block:has(.tl-entry[data-cat="side"]),
+[data-active-cats~="personal"] .year-block:has(.tl-entry[data-cat="personal"]),
+[data-active-cats~="hobby"] .year-block:has(.tl-entry[data-cat="hobby"]) {
+  display: grid;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 720px) {
+  .about-header {
+    grid-template-columns: 1fr;
+    gap: var(--ds-space-5);
+    padding: var(--ds-space-6) 0 var(--ds-space-5);
+  }
+  .polaroid {
+    max-width: 180px;
+    margin: 0 auto;
+  }
+  .about-intro h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .tl-yearrail .year-block {
+    grid-template-columns: 60px 1fr;
+    gap: var(--ds-space-4);
+  }
+  .tl-yearrail .year-label .year-num {
+    font-size: 20px;
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .polaroid {
+    transition: none;
+  }
+  .tl-card,
+  .tl-chip {
+    transition: none;
+  }
+}

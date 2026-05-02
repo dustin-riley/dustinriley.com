@@ -1,6 +1,6 @@
 {
-  "name": "bookworm-light-astro",
-  "version": "3.1.1",
+  "name": "dustinriley-astro",
+  "version": "4.0.0",
   "license": "MIT",
   "scripts": {
     "dev": "astro dev",

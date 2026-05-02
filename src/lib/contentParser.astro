@@ -18,9 +18,7 @@ export const getSinglePage = async <C extends CollectionKey>(
 ): Promise<CollectionEntry<C>[]> => {
   const allPages = await getCollection(collectionName);
 
-  const removeIndex = allPages.filter((data) => data.id.match(/^(?!-)/));
-
-  const removeDrafts = removeIndex.filter((data) => {
+  const removeDrafts = allPages.filter((data) => {
     const pageData = data.data as PageData;
     return pageData.draft !== true;
   });

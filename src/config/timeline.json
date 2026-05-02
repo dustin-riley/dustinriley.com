@@ -1,0 +1,183 @@
+{
+  "entries": [
+    {
+      "id": "vanta-patent",
+      "date": "April 2026",
+      "year": 2026,
+      "sortKey": 202604,
+      "category": "work",
+      "title": "Patent application filed: evidence artifacts for unstructured audit requests",
+      "blurb": "Co-filed a USPTO application with a teammate at Vanta. The idea: turn unstructured audit requests into structured workflows by reasoning over a repository of evidence and signals from prior audits. Patent pending."
+    },
+    {
+      "id": "vanta-promo",
+      "date": "September 2025",
+      "year": 2025,
+      "sortKey": 202509,
+      "category": "work",
+      "title": "Promoted to Senior Engineering Manager at Vanta",
+      "blurb": "Same teams, but the scope grew."
+    },
+    {
+      "id": "scorigami",
+      "date": "August 2025",
+      "year": 2025,
+      "sortKey": 202508,
+      "category": "side",
+      "title": "Shipped the college football scorigami visualization",
+      "blurb": "A heatmap of every final score that has ever happened in college football. Wrote about it for the blog.",
+      "url": "https://scorigami.dustinriley.com"
+    },
+    {
+      "id": "site-rebuild",
+      "date": "July 2025",
+      "year": 2025,
+      "sortKey": 202507,
+      "category": "side",
+      "title": "Built this site in Astro",
+      "blurb": "Wanted something tiny, fast, and easy to build with."
+    },
+    {
+      "id": "vanta-start",
+      "date": "September 2023",
+      "year": 2023,
+      "sortKey": 202309,
+      "category": "work",
+      "title": "Joined Vanta as a Software Engineering Manager",
+      "blurb": "Came in to run the Partner Experiences team. Compliance is a complex problem."
+    },
+    {
+      "id": "elation-start",
+      "date": "July 2022",
+      "year": 2022,
+      "sortKey": 202207,
+      "category": "work",
+      "title": "Joined Elation Health as a Software Engineering Manager",
+      "blurb": "Started mid-pivot toward value-based care as a company. Value-based care is still coming any day now."
+    },
+    {
+      "id": "columbus-move",
+      "date": "June 2021",
+      "year": 2021,
+      "sortKey": 202106,
+      "category": "personal",
+      "title": "Moved to Columbus",
+      "blurb": "Closer to family. The remote-work era made it work."
+    },
+    {
+      "id": "automox-start",
+      "date": "April 2021",
+      "year": 2021,
+      "sortKey": 202104,
+      "category": "work",
+      "title": "Joined Automox as a Software Engineering Manager",
+      "blurb": "Took over a brand-new applications pillar. Two engineers became thirteen, and the broader org went from sixty to two hundred."
+    },
+    {
+      "id": "purdue-cyber",
+      "date": "December 2019",
+      "year": 2019,
+      "sortKey": 201912,
+      "category": "education",
+      "title": "Completed the Purdue cybersecurity program",
+      "blurb": "Twelve weeks of threat modeling, incident response, and trying to break things."
+    },
+    {
+      "id": "lilly-promo",
+      "date": "January 2019",
+      "year": 2019,
+      "sortKey": 201901,
+      "category": "work",
+      "title": "Tech Lead and Product Owner at Eli Lilly",
+      "blurb": "Android tech lead and product owner for Tempo, Lilly's Class II personalized diabetes management app."
+    },
+    {
+      "id": "lilly-start",
+      "date": "June 2017",
+      "year": 2017,
+      "sortKey": 201706,
+      "category": "work",
+      "title": "Joined Eli Lilly as a Tech Lead in Digital Health",
+      "blurb": "First full-time role with a degree. Tech lead on Think. Talk. Treat. Migraine — Lilly's Class I iOS app for improving migraine conversations between patients and their doctors."
+    },
+    {
+      "id": "miami-grad",
+      "date": "May 2017",
+      "year": 2017,
+      "sortKey": 201705,
+      "category": "education",
+      "title": "BS in Computer Science, Miami University",
+      "blurb": "Met many of my closest friends here. Was working as a SWE before crossing the stage."
+    },
+    {
+      "id": "icagile",
+      "date": "December 2016",
+      "year": 2016,
+      "sortKey": 201612,
+      "category": "education",
+      "title": "Became an ICAgile Certified Professional",
+      "blurb": "After enough retrospectives, the certification mostly confirmed what teams had already taught me."
+    },
+    {
+      "id": "riley-media",
+      "date": "November 2014",
+      "year": 2014,
+      "sortKey": 201411,
+      "category": "work",
+      "title": "Founded Riley Media, LLC",
+      "blurb": "Client work alongside my own products. The biggest: a system that scraped breaking financial news, ran sentiment analysis on it, and drove trading decisions off the signal. Earned an offer from a top-ten US startup accelerator for another product."
+    },
+    {
+      "id": "dropoly",
+      "date": "May 2013",
+      "year": 2013,
+      "sortKey": 201305,
+      "category": "work",
+      "title": "First SWE job at Dropoly",
+      "blurb": "Educational and audit apps in the energy sector. Ported an ActionScript codebase to run on Android, then helped rebuild the whole thing in Meteor.js after we pivoted."
+    },
+    {
+      "id": "youtube-tutorials",
+      "date": "September 2012",
+      "year": 2012,
+      "sortKey": 201209,
+      "category": "side",
+      "title": "YouTube channel hit partnership status",
+      "blurb": "A run of game-dev tutorials. Apparently a lot of other people wanted to learn how to ship a game."
+    },
+    {
+      "id": "find-phone",
+      "date": "July 2011",
+      "year": 2011,
+      "sortKey": 201107,
+      "category": "side",
+      "title": "First Android app crossed 100,000 downloads",
+      "blurb": "A lost-phone finder, built after watching a couple fight over a lost one at a party. Pre-dated Find My Phone — turned out other people had the same problem."
+    },
+    {
+      "id": "ebay-ban",
+      "date": "April 2010",
+      "year": 2010,
+      "sortKey": 201004,
+      "category": "side",
+      "title": "Banned from eBay for selling game hacks",
+      "blurb": "Sold PlayStation and Call of Duty hacks until eBay caught on. Early entrepreneurial spirit, slightly misguided execution."
+    },
+    {
+      "id": "clan-site",
+      "date": "December 2007",
+      "year": 2007,
+      "sortKey": 200712,
+      "category": "side",
+      "title": "Built my gaming clan a website",
+      "blurb": "First time someone asked me to build something for them. A crappy phpBB install on free hosting. Felt like magic anyway."
+    }
+  ],
+  "yearSubtitles": {
+    "2017": "indianapolis",
+    "2021": "columbus",
+    "2023": "vanta",
+    "2025": "last year",
+    "2026": "this year"
+  }
+}

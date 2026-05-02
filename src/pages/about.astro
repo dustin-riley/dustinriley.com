@@ -1,16 +1,59 @@
 ---
-import config from "@/config/config.json";
-import social from "@/config/social.json";
 import Base from "@/layouts/Base.astro";
 import { getEntry, render } from "astro:content";
+import { Image } from "astro:assets";
+import profilePic from "@/assets/profile-pic.jpg";
+import timeline from "@/config/timeline.json";
+import "@/styles/timeline.css";
 
-const entry = await getEntry("about", "-index");
-if (!entry) throw new Error("Missing about content at src/content/about/-index.md");
+type TimelineEntry = {
+  id: string;
+  date: string;
+  year: number;
+  sortKey: number;
+  category: "work" | "education" | "side" | "personal";
+  title: string;
+  blurb?: string;
+  url?: string;
+};
+
+const entry = await getEntry("about", "about");
+if (!entry)
+  throw new Error("Missing about content at src/content/about/about.md");
 const { Content } = await render(entry);
-const { title, meta_title, description } = entry.data;
+const { meta_title, description } = entry.data;
 
-const githubUrl = social.github || "https://github.com/dustin-riley";
-const email = config.contactinfo.email;
+const categories = [
+  { key: "work", label: "work" },
+  { key: "education", label: "education" },
+  { key: "side", label: "side projects" },
+  { key: "personal", label: "personal" },
+] as const;
+
+const allCats = categories.map((c) => c.key).join(" ");
+
+const sorted = [...(timeline.entries as TimelineEntry[])].sort(
+  (a, b) => b.sortKey - a.sortKey,
+);
+
+const yearGroups: { year: number; sub: string; items: TimelineEntry[] }[] = [];
+const yearSubtitles = timeline.yearSubtitles as Record<string, string>;
+for (const e of sorted) {
+  const last = yearGroups[yearGroups.length - 1];
+  if (last && last.year === e.year) {
+    last.items.push(e);
+  } else {
+    yearGroups.push({
+      year: e.year,
+      sub: yearSubtitles[String(e.year)] ?? "",
+      items: [e],
+    });
+  }
+}
+
+const total = sorted.length;
+const catLabel = (key: string) =>
+  categories.find((c) => c.key === key)?.label ?? key;
 ---
 
 <Base
@@ -18,19 +61,133 @@ const email = config.contactinfo.email;
   description={description ?? "A little about me."}
 >
   <div class="ds-container">
-    <article class="ds-article">
-      <div class="article-meta">about</div>
-      <h1>{title}</h1>
-      <div class="article-body">
+    <header class="about-header">
+      <div class="blob" aria-hidden="true"></div>
+      <div class="blob blob-2" aria-hidden="true"></div>
+      <figure class="polaroid">
+        <Image
+          src={profilePic}
+          alt="Dustin Riley"
+          widths={[220, 440, 660]}
+          sizes="(max-width: 720px) 180px, 220px"
+        />
+        <figcaption>Me</figcaption>
+      </figure>
+      <div class="about-intro">
+        <div class="meta">about</div>
+        <h1>I'm Dustin.</h1>
         <Content />
-        <p>
-          If you want to say hi, <a href={`mailto:${email}`}>email</a> is best. I'm
-          also on
-          <a href={githubUrl} rel="noopener noreferrer" target="_blank"
-            >GitHub ↗</a
-          > and I keep an <a href="/rss.xml">rss feed</a> of the writing here.
-        </p>
       </div>
-    </article>
+    </header>
+
+    <section
+      class="timeline-root"
+      data-active-cats={allCats}
+      aria-label="Timeline"
+    >
+      <div class="tl-header">
+        <div class="tl-title">
+          <h2>The long version</h2>
+          <span class="count" data-total={total}>
+            {total} of {total} moments
+          </span>
+        </div>
+        <div class="tl-filters" role="group" aria-label="filter by category">
+          {
+            categories.map((c) => (
+              <button
+                type="button"
+                class="tl-chip"
+                data-cat={c.key}
+                aria-pressed="true"
+              >
+                <span class="swatch" aria-hidden="true" />
+                {c.label}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="tl-yearrail">
+        {
+          yearGroups.map((group) => (
+            <div class="year-block">
+              <div class="year-label">
+                <span class="year-num">{group.year}</span>
+                {group.sub && <span class="year-sub">{group.sub}</span>}
+              </div>
+              <div class="year-entries">
+                {group.items.map((e) => (
+                  <div class="tl-entry" data-cat={e.category}>
+                    <div class="tl-card">
+                      <div class="row1">
+                        <span class="tl-date">{e.date}</span>
+                        <span class="tl-cat-tag">{catLabel(e.category)}</span>
+                      </div>
+                      <h3 class="tl-title-text">
+                        {e.url ? (
+                          <a href={e.url} target="_blank" rel="noopener noreferrer">
+                            {e.title}
+                            <span class="tl-arrow" aria-hidden="true">↗</span>
+                          </a>
+                        ) : (
+                          e.title
+                        )}
+                      </h3>
+                      {e.blurb && <p class="tl-blurb">{e.blurb}</p>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
   </div>
 </Base>
+
+<script>
+  // The site mounts <ClientRouter /> in Base.astro, so this runs on every
+  // soft navigation that lands on /about, not just the first page load.
+  const setup = () => {
+    const root = document.querySelector<HTMLElement>(".timeline-root");
+    if (!root) return;
+
+    const chips = root.querySelectorAll<HTMLButtonElement>(".tl-chip");
+    const countEl = root.querySelector<HTMLElement>(".count");
+    const total = countEl ? Number(countEl.dataset.total ?? 0) : 0;
+
+    const getActive = (): string[] =>
+      (root.dataset.activeCats ?? "").split(/\s+/).filter(Boolean);
+
+    const setActive = (cats: string[]) => {
+      root.dataset.activeCats = cats.join(" ");
+      const active = new Set(cats);
+      let visible = 0;
+      root.querySelectorAll<HTMLElement>(".tl-entry").forEach((el) => {
+        if (active.has(el.dataset.cat ?? "")) visible++;
+      });
+      if (countEl) countEl.textContent = `${visible} of ${total} moments`;
+      chips.forEach((chip) => {
+        const cat = chip.dataset.cat ?? "";
+        chip.setAttribute("aria-pressed", String(active.has(cat)));
+      });
+    };
+
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const cat = chip.dataset.cat ?? "";
+        if (!cat) return;
+        const cats = getActive();
+        const idx = cats.indexOf(cat);
+        if (idx >= 0) cats.splice(idx, 1);
+        else cats.push(cat);
+        setActive(cats);
+      });
+    });
+  };
+
+  document.addEventListener("astro:page-load", setup);
+</script>

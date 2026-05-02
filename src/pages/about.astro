@@ -13,8 +13,8 @@ type TimelineEntry = {
   sortKey: number;
   category: "work" | "education" | "side" | "personal";
   title: string;
-  org?: string;
   blurb?: string;
+  url?: string;
 };
 
 const entry = await getEntry("about", "about");
@@ -125,7 +125,16 @@ const catLabel = (key: string) =>
                         <span class="tl-date">{e.date}</span>
                         <span class="tl-cat-tag">{catLabel(e.category)}</span>
                       </div>
-                      <h3 class="tl-title-text">{e.title}</h3>
+                      <h3 class="tl-title-text">
+                        {e.url ? (
+                          <a href={e.url} target="_blank" rel="noopener noreferrer">
+                            {e.title}
+                            <span class="tl-arrow" aria-hidden="true">↗</span>
+                          </a>
+                        ) : (
+                          e.title
+                        )}
+                      </h3>
                       {e.blurb && <p class="tl-blurb">{e.blurb}</p>}
                     </div>
                   </div>

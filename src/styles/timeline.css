@@ -220,7 +220,6 @@
 
 .tl-card {
   background: var(--ds-bg);
-  border: 1px solid transparent;
   border-radius: var(--ds-radius-md);
   padding: var(--ds-space-4) var(--ds-space-5);
   transition: all var(--ds-duration-base) var(--ds-ease-standard);
@@ -259,6 +258,40 @@
   letter-spacing: -0.01em;
   margin: 4px 0 0;
   color: var(--ds-text);
+}
+
+.tl-title-text a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--ds-duration-fast) var(--ds-ease-standard);
+}
+
+.tl-title-text a:hover {
+  color: var(--ds-link);
+}
+
+.tl-arrow {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 0.85em;
+  color: var(--ds-text-muted);
+  transition:
+    color var(--ds-duration-fast) var(--ds-ease-standard),
+    transform var(--ds-duration-base) var(--ds-ease-standard);
+}
+
+.tl-title-text a:hover .tl-arrow {
+  color: var(--ds-link);
+  transform: translate(2px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-arrow {
+    transition: color var(--ds-duration-fast) var(--ds-ease-standard);
+  }
+  .tl-title-text a:hover .tl-arrow {
+    transform: none;
+  }
 }
 
 .tl-blurb {
@@ -333,10 +366,6 @@
   border: 4px solid var(--ds-bg);
   box-shadow: 0 0 0 1px var(--cat);
   z-index: 1;
-}
-
-.tl-yearrail .tl-entry {
-  padding-left: 0;
 }
 
 /* ============================================================

@@ -1,10 +1,9 @@
 ---
-import config from "@/config/config.json";
 import social from "@/config/social.json";
 
 const year = new Date().getFullYear();
 const githubUrl = social.github || "https://github.com/dustin-riley";
-const email = config.contactinfo.email;
+const linkedinUrl = social.linkedin;
 ---
 
 <footer class="ds-container">
@@ -12,8 +11,8 @@ const email = config.contactinfo.email;
     <div>© {year} Dustin Riley</div>
     <div class="links">
       <a href={githubUrl} rel="noopener noreferrer" target="_blank">github ↗</a>
+      <a href={linkedinUrl} rel="noopener noreferrer" target="_blank">linkedin ↗</a>
       <a href="/rss.xml">rss</a>
-      <a href={`mailto:${email}`}>email</a>
     </div>
   </div>
 </footer>

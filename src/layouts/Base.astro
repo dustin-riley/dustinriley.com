@@ -1,6 +1,7 @@
 ---
 import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
 import config from "@/config/config.json";
+import social from "@/config/social.json";
 import { plainify } from "@/lib/utils/textConverter";
 import Footer from "@/partials/Footer.astro";
 import Header from "@/partials/Header.astro";
@@ -17,6 +18,8 @@ export interface Props {
   canonical?: string;
   og_type?: "website" | "article";
   published_time?: Date;
+  image_width?: number;
+  image_height?: number;
 }
 
 // distructure frontmatters
@@ -29,11 +32,48 @@ const {
   canonical,
   og_type = "website",
   published_time,
+  image_width,
+  image_height,
 } = Astro.props;
 
 const pageUrl = new URL(Astro.url.pathname, config.site.base_url).href;
 const canonicalUrl = canonical ?? pageUrl;
 const ogImageUrl = new URL(image ?? config.metadata.meta_image, config.site.base_url).href;
+// Only declare dimensions when we know them. The default OG image is generated
+// at exactly 1200x630; per-post images must opt in via frontmatter.
+const ogImageWidth = image_width ?? (image ? undefined : 1200);
+const ogImageHeight = image_height ?? (image ? undefined : 630);
+
+const twitterHandle = (social as { twitter_handle?: string }).twitter_handle;
+
+// JSON-LD: BlogPosting on article pages, lets Google show date/thumbnail in
+// search results and helps LinkedIn/iMessage parsers attribute correctly.
+const articleJsonLd =
+  og_type === "article"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: plainify(title ?? config.site.title),
+        description: plainify(description ?? config.metadata.meta_description),
+        image: ogImageUrl,
+        datePublished: published_time?.toISOString(),
+        dateModified: published_time?.toISOString(),
+        author: {
+          "@type": "Person",
+          name: config.metadata.meta_author,
+          url: config.site.base_url,
+        },
+        publisher: {
+          "@type": "Person",
+          name: config.metadata.meta_author,
+          url: config.site.base_url,
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": canonicalUrl,
+        },
+      }
+    : null;
 ---
 
 <!doctype html>
@@ -84,8 +124,8 @@ const ogImageUrl = new URL(image ?? config.metadata.meta_image, config.site.base
       {plainify(meta_title ? meta_title : title ? title : config.site.title)}
     </title>
 
-    <!-- canonical url -->
-    <link rel="canonical" href={canonicalUrl} item-prop="url" />
+    <!-- canonical url (omitted on noindex pages — they have no canonical) -->
+    {!noindex && <link rel="canonical" href={canonicalUrl} item-prop="url" />}
 
     <!-- noindex robots -->
     {noindex && <meta name="robots" content="noindex,nofollow" />}
@@ -107,7 +147,7 @@ const ogImageUrl = new URL(image ?? config.metadata.meta_image, config.site.base
     <meta property="og:site_name" content={config.site.title} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content={og_type} />
-    <meta property="og:url" content={pageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta
       property="og:title"
       content={plainify(
@@ -121,8 +161,12 @@ const ogImageUrl = new URL(image ?? config.metadata.meta_image, config.site.base
       )}
     />
     <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    {ogImageWidth && ogImageHeight && (
+      <>
+        <meta property="og:image:width" content={String(ogImageWidth)} />
+        <meta property="og:image:height" content={String(ogImageHeight)} />
+      </>
+    )}
     <meta
       property="og:image:alt"
       content={plainify(
@@ -138,6 +182,12 @@ const ogImageUrl = new URL(image ?? config.metadata.meta_image, config.site.base
 
     <!-- twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    {twitterHandle && (
+      <>
+        <meta name="twitter:site" content={twitterHandle} />
+        <meta name="twitter:creator" content={twitterHandle} />
+      </>
+    )}
     <meta
       name="twitter:title"
       content={plainify(
@@ -151,6 +201,13 @@ const ogImageUrl = new URL(image ?? config.metadata.meta_image, config.site.base
       )}
     />
     <meta name="twitter:image" content={ogImageUrl} />
+
+    {articleJsonLd && (
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify(articleJsonLd)}
+      />
+    )}
   </head>
   <body>
     <TwSizeIndicator />

@@ -15,11 +15,25 @@ export interface Props {
   image?: string;
   noindex?: boolean;
   canonical?: string;
+  og_type?: "website" | "article";
+  published_time?: Date;
 }
 
 // distructure frontmatters
-const { title, meta_title, description, image, noindex, canonical } =
-  Astro.props;
+const {
+  title,
+  meta_title,
+  description,
+  image,
+  noindex,
+  canonical,
+  og_type = "website",
+  published_time,
+} = Astro.props;
+
+const pageUrl = new URL(Astro.url.pathname, config.site.base_url).href;
+const canonicalUrl = canonical ?? pageUrl;
+const ogImageUrl = new URL(image ?? config.metadata.meta_image, config.site.base_url).href;
 ---
 
 <!doctype html>
@@ -71,7 +85,7 @@ const { title, meta_title, description, image, noindex, canonical } =
     </title>
 
     <!-- canonical url -->
-    {canonical && <link rel="canonical" href={canonical} item-prop="url" />}
+    <link rel="canonical" href={canonicalUrl} item-prop="url" />
 
     <!-- noindex robots -->
     {noindex && <meta name="robots" content="noindex,nofollow" />}
@@ -89,59 +103,54 @@ const { title, meta_title, description, image, noindex, canonical } =
     <!-- author from config.json -->
     <meta name="author" content={config.metadata.meta_author} />
 
-    <!-- og-title -->
+    <!-- og -->
+    <meta property="og:site_name" content={config.site.title} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content={og_type} />
+    <meta property="og:url" content={pageUrl} />
     <meta
       property="og:title"
       content={plainify(
         meta_title ? meta_title : title ? title : config.site.title
       )}
     />
-
-    <!-- og-description -->
     <meta
       property="og:description"
       content={plainify(
         description ? description : config.metadata.meta_description
       )}
     />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta
-      property="og:url"
-      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
+      property="og:image:alt"
+      content={plainify(
+        title ? title : config.metadata.meta_description
+      )}
     />
+    {og_type === "article" && published_time && (
+      <meta
+        property="article:published_time"
+        content={published_time.toISOString()}
+      />
+    )}
 
-    <!-- twitter-title -->
+    <!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
       content={plainify(
         meta_title ? meta_title : title ? title : config.site.title
       )}
     />
-
-    <!-- twitter-description -->
     <meta
       name="twitter:description"
       content={plainify(
         description ? description : config.metadata.meta_description
       )}
     />
-
-    <!-- og-image -->
-    <meta
-      property="og:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
-
-    <!-- twitter-image -->
-    <meta
-      name="twitter:image"
-      content={`${config.site.base_url}${
-        image ? image : config.metadata.meta_image
-      }`}
-    />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
   <body>
     <TwSizeIndicator />

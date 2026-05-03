@@ -37,6 +37,8 @@ const postsCollection = defineCollection({
     description: z.string().optional(),
     date: z.date().optional(),
     image: z.string().optional(),
+    image_width: z.number().optional(),
+    image_height: z.number().optional(),
     categories: z.array(z.string()).default(["others"]),
     authors: z.array(z.string()).default(["Admin"]),
     tags: z.array(z.string()).default(["others"]),

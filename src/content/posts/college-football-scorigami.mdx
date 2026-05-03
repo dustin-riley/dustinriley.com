@@ -1,0 +1,123 @@
+---
+title: "Building scorigami for college football"
+meta_title: "College football scorigami: interactive data visualization project"
+description: "I built an interactive college football scorigami visualization tool."
+date: 2025-08-02T05:00:00Z
+image: "/images/posts/scorigami-grid.png"
+image_width: 1200
+image_height: 630
+categories: ["development", "data-visualization"]
+authors: ["Dustin Riley"]
+tags: ["college-football", "scorigami", "nextjs", "postgresql", "data-visualization", "side-project"]
+draft: false
+---
+
+I've always been fascinated by the intersection of sports and data, and a Twitter thread between FBS Communications Directors led to my next side project.
+
+## The spark
+
+It started with a simple tweet thread. Dave Meyer, Communications Director for my alma mater, shared a scorigami chart for UCF's football program, showcasing all the unique score combinations their team had achieved throughout history.
+
+<blockquote class="twitter-tweet" data-theme="light">
+  <a href="https://twitter.com/DaveMeyerMU/status/1944756268561826098"></a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+I've always wanted a website where any fan could explore scorigami data for their favorite team or division, and compare across different eras of college football. I was looking for something "vibe-codable" and this seemed to fit the bill, so I decided to tackle it myself.
+
+For those unfamiliar with the concept, "scorigami" was popularized by Jon Bois in his excellent video series, referring to final scores that have never occurred before in a sport's history. It's a fun (albeit mostly useless) way to look at game outcomes.
+
+<Youtube
+  client:visible
+  id="9l5C8cGMueY"
+  title="Every NFL Score Ever | Chart Party"
+  params="rel=0"
+  nocookie
+/>
+
+## The technical side
+
+### The tech stack
+
+Most of the stack was picked for learning. I hadn't used Next.js or Vercel before, and this felt like it met the stated use case — something AI could build with. The full stack includes:
+
+- **Frontend**: React with TypeScript
+- **Styling**: Tailwind CSS v4 with shadcn/ui components
+- **Visualization**: Custom CSS Grid heatmap (more on this decision below)
+- **Database**: PostgreSQL hosted on Neon
+- **Hosting**: Vercel (this might deserve its own blog post)
+- **Data Source**: College Football Data API (CFBD), synced into Postgres on a weekly cron
+
+### Some technical decisions
+
+#### Solving the timeout problem
+
+The first iteration of the site relied entirely on the CollegeFootballData.com API. While their service is fantastic and free for developers, I quickly ran into timeout issues when requesting large datasets—like "show me all games from 2000–2023." It seemed impolite to keep hammering the API in a way that wasn't intended.
+
+I ended up putting a PostgreSQL database behind a small repository layer so the data source is swappable. A weekly cron job pulls recent games from the CFBD API — incrementally, with a 14-day lookback window — instead of refetching everything. That solved the timeout issue, kept me from being a bad API citizen, and opened up the more complex filtering and aggregations that would've been expensive to compute on-demand.
+
+#### CSS Grid over chart libraries
+
+Initially, I used ApexCharts for the heatmap visualization. While functional, it felt overkill for what's essentially a colored grid. I migrated to a pure CSS Grid implementation with Tailwind classes, resulting in:
+
+- 60% smaller bundle size
+- Faster rendering for large datasets  
+- Better mobile responsiveness
+- Easier customization of hover states and interactions
+
+```typescript
+// Each cell is just a tinted div. The 0.25 floor keeps
+// low-frequency scores visible against the empty-cell tone
+// when maxCount is small.
+const HeatmapCell = ({ count, maxCount }) => {
+  const intensity = count / maxCount;
+  const alpha = 0.25 + intensity * 0.75;
+  return (
+    <div
+      className="aspect-square"
+      style={{ backgroundColor: `rgba(184, 84, 28, ${alpha})` }}
+    >
+      {intensity > 0.7 && <span>{count}</span>}
+    </div>
+  );
+};
+```
+
+#### An AI search experiment, behind a flag
+
+The other thing I've been tinkering with — feature-flagged off in production — is a ⌘K command menu that turns natural language into filter state. The idea is that typing "alabama bowl games during the saban era" returns something like `{ team: "Alabama", years: "2007–2023", season: "postseason" }`, which the existing filter UI then applies.
+
+Under the hood it's a small server route that calls a HuggingFace-hosted Llama 3.2 3B model and validates the JSON it returns. Honestly, the site doesn't need natural-language search — the manual filters work fine. I wanted a low-stakes place to learn the API surface, prompt iteration, and the validation / timeout / fallback patterns that come with shipping anything LLM-shaped. So far the lessons have been more about constraining model output than anything a user would notice.
+
+### Performance and user experience
+
+The site handles datasets with 100,000+ games while maintaining ~1.2s initial load times after a lot of trial and error. Rendering a grid with hundreds of objects can get expensive if done poorly (which I did the first time). There's still plenty of room for improvement here, and that could be a future blog post.
+
+## Follow-ups
+
+### Export and sharing
+
+I added the ability to save and share your views with a PNG export of current heatmap filters. 
+
+### Enhanced filtering
+
+I want to expand the current filter options. Future additions could include:
+- Team-level venue type (home/away/neutral site)
+- Rivalry outcomes
+- Conference matchups vs. non-conference games
+
+### Mobile
+
+Mobile was tough for this. There's not a great, easy way to display a large grid on mobile. I've accepted good enough here.
+
+## Open source
+
+The codebase isn't open source yet, but I'm considering it. It needs a bit of cleanup first, given how vibe-coded it is.
+
+## Wrapping up
+
+I'm happy with the result, and it does what it's supposed to. It's been a fun side project to dump time and tokens into.
+
+---
+
+*Find me on Twitter [@dustin_riley](https://twitter.com/dustin_riley) or check out the site at [scorigami.dustinriley.com](https://scorigami.dustinriley.com).*

@@ -24,6 +24,13 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { title, meta_title, description, image } = page.data;
+const isPost = postsSlug.includes(page.id);
+const postData = isPost
+  ? (page.data as CollectionEntry<"posts">["data"])
+  : null;
+const publishedTime = postData?.date;
+const imageWidth = postData?.image_width;
+const imageHeight = postData?.image_height;
 ---
 
 <Base
@@ -31,9 +38,13 @@ const { title, meta_title, description, image } = page.data;
   meta_title={meta_title}
   description={description}
   image={image}
+  image_width={imageWidth}
+  image_height={imageHeight}
+  og_type={isPost ? "article" : "website"}
+  published_time={publishedTime}
 >
   {
-    postsSlug.includes(page.id) ? (
+    isPost ? (
       <PostSingle post={page} />
     ) : (
       <Default data={page} />

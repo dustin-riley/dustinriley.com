@@ -842,3 +842,11 @@ Contract: tokens+core(+tailwind). Both apps on ^0.2.0, reset import removed,
 verified (only underline in built CSS is Preflight abbr / app prose /
 .ds-article .article-body a — zero package-origin). dustinriley.com base.css
 legacy heading-font fix retained.
+
+### Correction 5 — no global `a` rule (0.2.1)
+
+Global `:where(a){color:--ds-link}` had the same unlayered-beats-scorigami
+defect as the underline → orange nav in scorigami vs black in dustinriley.com.
+Removed entirely; core.css ships no `a` rule. Both apps bump ^0.2.1 (no source
+change — they don't import reset and don't depend on global a). Verify
+scorigami nav now matches dustinriley.com (text color, not orange).

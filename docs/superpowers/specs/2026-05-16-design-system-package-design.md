@@ -269,3 +269,26 @@ layer origin. So an imported package reset always beat Tailwind Preflight
 consumer's chrome must fight; and verify cascades by parsing resolved
 `@layer`/origin of competing rules in built CSS (or computed styles), never by
 "the rule/selector exists."
+
+---
+
+## Addendum 5 2026-05-16 — no global `a` rule at all (color too)
+
+Addendum 4 removed the global link *underline* but left
+`:where(a){color:var(--ds-link)}` in core.css. Same defect, different
+property: scorigami pulls core.css **unlayered** (via tailwind.css), so that
+rule beat scorigami's `@layer components .site-nav a.nav-link{color:--ds-text}`
+→ orange nav links; dustinriley.com imports core.css *inside* `@layer
+components` so its nav rule won → black. The inconsistency exposed that any
+global `a` declaration is wrong: `<a>` is simultaneously chrome (nav, brand,
+footer, back-link) and content (prose links), so no single system-wide value
+is correct, and unlayered delivery beats consumer layers regardless.
+
+**Final rule (0.2.1):** core.css ships **no `a` rule whatsoever** — no color,
+no decoration. Links inherit text color via Tailwind Preflight; link
+color/underline is exclusively a component/prose decision the app makes
+(`.ds-article .article-body a`, the app's `prose` plugin, `.nav-link.active`,
+etc.). Enforced by a test asserting core.css contains no `:where(a)`/bare `a`
+rule. Consumer note: a truly bare `<a>` (outside nav/prose/component context)
+now inherits text color instead of `--ds-link` — intended; give such links a
+component/utility class to opt into link color.

@@ -183,3 +183,33 @@ was structurally blind to a pure-CSS cascade regression and the per-task +
 holistic reviews all passed. Verification for consumer conversions MUST include
 a computed-style/visual check (key elements: link `text-decoration`, code block
 rendering, responsive heading sizes), not an HTML diff alone.
+
+---
+
+## Addendum 2 2026-05-16 — the layer must be set at the consumer import
+
+The first addendum's plan (wrap resets in `@layer base` *inside* reset.css and
+import it plainly) was **proven wrong by build evidence**. Lightning CSS (used
+by both Astro `@tailwindcss/vite` and Next + Tailwind v4) **flattens a
+package-internal `@layer` when the file is pulled in via `@import`** — the
+rules end up *unlayered*, which beats every `@layer` and re-underlined every
+link in both apps. A consumer's own `@layer components {}` block survives;
+an imported file's `@layer` does not.
+
+**Corrected uniform contract:** the cascade layer must be declared at the
+**consumer's import statement**:
+
+    @import "@dustin-riley/design/reset.css" layer(base);
+
+This is still one uniform line for every app (no per-app judgment), and the
+layer assignment is reliably honored because it is the consumer's own
+`@import`. `reset.css` therefore ships as **plain element rules** (no internal
+`@layer`, no `@import "./tokens.css"`); the consumer owns layering and already
+imports tokens. Verified with a deterministic `@layer`-containment parser of
+the built CSS (reset `a` → `base`; nav/footer/`.ds-article` links + Shiki `pre
+code` → `components`, which wins). Shipped: reset.css cleaned in 0.1.2; the
+functional fix works on 0.1.1 too (it is purely the consumer import form).
+
+**Process note:** verification must parse the *resolved `@layer` containment of
+the competing rules in the built CSS* (or use real computed styles), not merely
+confirm a rule/selector is present. "Rule exists" is not "rule wins."

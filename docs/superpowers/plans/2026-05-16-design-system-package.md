@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Extract the `--ds-*` design system into a public npm package `@dustinriley/design`, then convert both dustinriley.com and scorigami to consume it.
+**Goal:** Extract the `--ds-*` design system into a public npm package `@dustin-riley/design`, then convert both dustinriley.com and scorigami to consume it.
 
 **Architecture:** A standalone repo at `/Users/dustin/Development/dustinriley-design` publishing three CSS entry points — `tokens.css` (constitution: variables + focus ring + base element resets), `core.css` (audited reusable primitives), and an optional `tailwind.css` (Tailwind v4 `@theme` + shadcn HSL bridge). The shadcn HSL block is **generated** from `tokens.css` by a script so the hex→HSL duplication cannot drift. `DESIGN.md` and a `dustinriley-design` Claude Skill ship inside the package. The two existing apps are then converted to import the package, validating it.
 
@@ -60,7 +60,7 @@ node_modules/
 
 ```json
 {
-  "name": "@dustinriley/design",
+  "name": "@dustin-riley/design",
   "version": "0.1.0",
   "description": "Dustin Riley design system — warm mid-century modern tokens and primitives.",
   "license": "MIT",
@@ -86,7 +86,7 @@ node_modules/
 ```bash
 cd /Users/dustin/Development/dustinriley-design
 git add -A
-git commit -q -m "chore: scaffold @dustinriley/design package"
+git commit -q -m "chore: scaffold @dustin-riley/design package"
 ```
 
 ---
@@ -470,8 +470,8 @@ cp /Users/dustin/Development/dustinriley.com/DESIGN.md DESIGN.md
 ```
 
 Then edit `DESIGN.md`:
-- Change the H1 to `# Design system — @dustinriley/design`.
-- Replace the "Where things live" table file paths with package paths: tokens → `@dustinriley/design/tokens.css`, components → `@dustinriley/design/core.css`, Tailwind/shadcn bridge → `@dustinriley/design/tailwind.css`.
+- Change the H1 to `# Design system — @dustin-riley/design`.
+- Replace the "Where things live" table file paths with package paths: tokens → `@dustin-riley/design/tokens.css`, components → `@dustin-riley/design/core.css`, Tailwind/shadcn bridge → `@dustin-riley/design/tailwind.css`.
 - In the "Component anchors" and "Caveats" sections, delete rows/bullets that reference excluded site furniture (`.hero`, `.experiment-grid`, `.writing-list`, `.ds-article`, `.ds-pager`, `.ds-related`, `.ds-search-input`, the Bookworm/Astro/`Base.astro`/Header.astro wordmark caveats). Keep only primitives that ship in `core.css`.
 - Delete the line claiming the skill is "generated at claude.ai/design"; replace with: "This doc is the source of truth; the bundled `dustinriley-design` skill mirrors it."
 
@@ -482,12 +482,12 @@ Then edit `DESIGN.md`:
 ```markdown
 ---
 name: dustinriley-design
-description: Use when building or modifying any UI in a project that consumes @dustinriley/design — enforces the warm mid-century-modern token system, the three-radii/three-shadow rules, sentence-case voice, and the curated .ds-* primitive vocabulary.
+description: Use when building or modifying any UI in a project that consumes @dustin-riley/design — enforces the warm mid-century-modern token system, the three-radii/three-shadow rules, sentence-case voice, and the curated .ds-* primitive vocabulary.
 ---
 
 # dustinriley design system
 
-Apply this whenever you add or change UI in a project importing `@dustinriley/design`.
+Apply this whenever you add or change UI in a project importing `@dustin-riley/design`.
 
 ## Non-negotiables
 - One primary (burnt orange `#B8541C`), accents ochre + teal. Never invent colors.
@@ -498,8 +498,8 @@ Apply this whenever you add or change UI in a project importing `@dustinriley/de
 - Never hard-code a hex/px value — reference a `--ds-*` token.
 
 ## How to consume
-- Always: `@import "@dustinriley/design/tokens.css"; @import "@dustinriley/design/core.css";`
-- Tailwind v4 + shadcn projects additionally: `@import "@dustinriley/design/tailwind.css";`
+- Always: `@import "@dustin-riley/design/tokens.css"; @import "@dustin-riley/design/core.css";`
+- Tailwind v4 + shadcn projects additionally: `@import "@dustin-riley/design/tailwind.css";`
 
 ## Vocabulary (prefer extending these over inventing parallels)
 Buttons `.ds-btn` + `.ds-btn-primary|secondary|ghost`; layout `.ds-container`,
@@ -510,13 +510,13 @@ surfaces `.ds-panel`, `.kbd`.
 Site-specific furniture (nav, footer, hero, grids) is NOT in the package by
 design — build it per project from these primitives and tokens.
 
-See the full rationale in `@dustinriley/design/DESIGN.md`.
+See the full rationale in `@dustin-riley/design/DESIGN.md`.
 ```
 
 - [ ] **Step 3: Write `README.md`**
 
 ````markdown
-# @dustinriley/design
+# @dustin-riley/design
 
 Warm mid-century-modern design system: tokens, base resets, and a curated set of
 reusable CSS primitives. Framework-neutral, with an optional Tailwind v4 +
@@ -525,18 +525,18 @@ shadcn bridge.
 ## Install
 
 ```bash
-npm i @dustinriley/design
+npm i @dustin-riley/design
 ```
 
 ## Use
 
 ```css
 /* any project */
-@import "@dustinriley/design/tokens.css";
-@import "@dustinriley/design/core.css";
+@import "@dustin-riley/design/tokens.css";
+@import "@dustin-riley/design/core.css";
 
 /* Tailwind v4 + shadcn projects instead just need: */
-@import "@dustinriley/design/tailwind.css"; /* pulls in core + tokens */
+@import "@dustin-riley/design/tailwind.css"; /* pulls in core + tokens */
 ```
 
 ## What's in / out
@@ -563,7 +563,7 @@ git commit -q -m "docs: bundle de-scoped DESIGN.md, Claude skill, and README"
 
 ---
 
-### Task 6: Publish `@dustinriley/design` to public npm
+### Task 6: Publish `@dustin-riley/design` to public npm
 
 **Files:** none (publish action)
 
@@ -589,7 +589,7 @@ Then publish:
 ```bash
 cd /Users/dustin/Development/dustinriley-design && npm publish --access public
 ```
-Expected: `+ @dustinriley/design@0.1.0`.
+Expected: `+ @dustin-riley/design@0.1.0`.
 
 - [ ] **Step 3: Tag the release and commit**
 
@@ -625,19 +625,19 @@ Expected: build succeeds; baseline copied. This is the pixel-equivalence referen
 
 ```bash
 cd /Users/dustin/Development/dustinriley.com
-npm i @dustinriley/design@^0.1.0
+npm i @dustin-riley/design@^0.1.0
 ```
 
 - [ ] **Step 3: Repoint `main.css`**
 
-In `/Users/dustin/Development/dustinriley.com/src/styles/main.css`, replace `@import "./tokens.css";` with `@import "@dustinriley/design/tokens.css";`. Leave the `@layer components { @import "./design-system.css"; }` line in place for now (next step trims that file).
+In `/Users/dustin/Development/dustinriley.com/src/styles/main.css`, replace `@import "./tokens.css";` with `@import "@dustin-riley/design/tokens.css";`. Leave the `@layer components { @import "./design-system.css"; }` line in place for now (next step trims that file).
 
 - [ ] **Step 4: Reduce `design-system.css` to site furniture only**
 
 In `/Users/dustin/Development/dustinriley.com/src/styles/design-system.css`, delete every rule block whose selector is in `core.css` (the audited-in list: `.ds-container`, `.ds-section`, `.ds-display`, `.ds-lede`, `.ds-caption`, `.ds-mono-note`, `.grid-label`, `.ds-page-header`, `.ds-back-link`, `.ds-btn*`, `.h1`–`.h6`). Add this as the file's first line so the now-removed primitives still resolve:
 
 ```css
-@import "@dustinriley/design/core.css";
+@import "@dustin-riley/design/core.css";
 ```
 
 Keep all site-furniture rules (`.hero`, `.experiment-grid`, `.experiment-card`, `.writing-list`, `.writing-item`, `.site-nav`, `.site-footer`, `.ds-article`, `.ds-pager`, `.ds-related`, `.ds-search-input`, `.ds-chip-cloud`, `.ds-see-all`) in place.
@@ -667,7 +667,7 @@ Run `npm run preview` and load `/`, `/about`, `/experiments`, a blog post, and `
 ```bash
 cd /Users/dustin/Development/dustinriley.com
 git add -A
-git commit -m "$(printf 'refactor: consume @dustinriley/design for tokens + primitives\n\nReplaces the local tokens.css and primitive classes with the\nextracted package; design-system.css now holds only site furniture.\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>')"
+git commit -m "$(printf 'refactor: consume @dustin-riley/design for tokens + primitives\n\nReplaces the local tokens.css and primitive classes with the\nextracted package; design-system.css now holds only site furniture.\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>')"
 ```
 
 ---
@@ -693,7 +693,7 @@ Expected: build succeeds; baseline copied.
 
 ```bash
 cd /Users/dustin/Development/scorigami
-npm i @dustinriley/design@^0.1.0
+npm i @dustin-riley/design@^0.1.0
 ```
 
 - [ ] **Step 3: Rewrite `globals.css` to consume the package**
@@ -702,7 +702,7 @@ Replace the entire contents of `/Users/dustin/Development/scorigami/src/app/glob
 
 ```css
 @import "tailwindcss";
-@import "@dustinriley/design/tailwind.css";
+@import "@dustin-riley/design/tailwind.css";
 
 /* ============================================================
    scorigami site furniture — NOT part of the design system.
@@ -710,7 +710,7 @@ Replace the entire contents of `/Users/dustin/Development/scorigami/src/app/glob
    ============================================================ */
 ```
 
-Then, **below that banner**, paste back only the scorigami-specific furniture rule blocks that the app actually uses, copied from the pre-change git version of the file (recover via `git show HEAD:src/app/globals.css`): the chart card internals and any site chrome scorigami renders. Determine which by grep before pasting (next step). Do **not** paste back the `:root { --ds-* }` token block, the shadcn `:root` HSL block, the `@theme` block, the `@layer base` resets, or any primitive now provided by the package — those come from `@dustinriley/design/tailwind.css`.
+Then, **below that banner**, paste back only the scorigami-specific furniture rule blocks that the app actually uses, copied from the pre-change git version of the file (recover via `git show HEAD:src/app/globals.css`): the chart card internals and any site chrome scorigami renders. Determine which by grep before pasting (next step). Do **not** paste back the `:root { --ds-* }` token block, the shadcn `:root` HSL block, the `@theme` block, the `@layer base` resets, or any primitive now provided by the package — those come from `@dustin-riley/design/tailwind.css`.
 
 - [ ] **Step 4: Grep-confirm furniture usage; drop dead furniture**
 
@@ -740,14 +740,14 @@ Expected: build + typecheck + lint pass. Then run `npm run dev`, load `/`, exerc
 cd /Users/dustin/Development/scorigami
 grep -c -- '--ds-' src/app/globals.css
 ```
-Expected: `0` — no `--ds-*` token is defined locally anymore; every token now resolves through `@dustinriley/design`. (References inside furniture rules like `var(--ds-surface)` are fine and expected; this command counts *definitions and uses* — the meaningful check is that there is no `:root { --ds-…: #… }` declaration block left. Visually verify none remain.)
+Expected: `0` — no `--ds-*` token is defined locally anymore; every token now resolves through `@dustin-riley/design`. (References inside furniture rules like `var(--ds-surface)` are fine and expected; this command counts *definitions and uses* — the meaningful check is that there is no `:root { --ds-…: #… }` declaration block left. Visually verify none remain.)
 
 - [ ] **Step 7: Commit**
 
 ```bash
 cd /Users/dustin/Development/scorigami
 git add -A
-git commit -m "$(printf 'refactor: consume @dustinriley/design; purge leaked furniture\n\nReplaces the hand-copied token block + Tailwind/shadcn bridge with\nthe extracted package, and removes dustinriley.com site furniture\n(hero/blobs, experiment-grid, writing-list) that was never used here.\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>')"
+git commit -m "$(printf 'refactor: consume @dustin-riley/design; purge leaked furniture\n\nReplaces the hand-copied token block + Tailwind/shadcn bridge with\nthe extracted package, and removes dustinriley.com site furniture\n(hero/blobs, experiment-grid, writing-list) that was never used here.\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>')"
 ```
 
 ---
@@ -761,24 +761,24 @@ git commit -m "$(printf 'refactor: consume @dustinriley/design; purge leaked fur
 
 - [ ] **Step 1: Update dustinriley.com docs**
 
-In `dustinriley.com/CLAUDE.md` and `dustinriley.com/DESIGN.md`, update the "Where things live" / design-system sections to state that tokens and primitives now come from the `@dustinriley/design` package (imported in `src/styles/main.css` and at the top of `src/styles/design-system.css`), and that `design-system.css` now holds only site furniture. Do not duplicate token values in the docs — point to the package.
+In `dustinriley.com/CLAUDE.md` and `dustinriley.com/DESIGN.md`, update the "Where things live" / design-system sections to state that tokens and primitives now come from the `@dustin-riley/design` package (imported in `src/styles/main.css` and at the top of `src/styles/design-system.css`), and that `design-system.css` now holds only site furniture. Do not duplicate token values in the docs — point to the package.
 
 - [ ] **Step 2: Update scorigami CLAUDE.md**
 
-In `scorigami/CLAUDE.md`'s "Design System" section, replace "Tokens (defined in `src/app/globals.css`)" with "Tokens and primitives come from `@dustinriley/design` (imported in `src/app/globals.css` via `@dustinriley/design/tailwind.css`)"; note that `globals.css` now contains only scorigami furniture; remove the now-false "Mirrors dustinriley.com/src/styles/..." framing.
+In `scorigami/CLAUDE.md`'s "Design System" section, replace "Tokens (defined in `src/app/globals.css`)" with "Tokens and primitives come from `@dustin-riley/design` (imported in `src/app/globals.css` via `@dustin-riley/design/tailwind.css`)"; note that `globals.css` now contains only scorigami furniture; remove the now-false "Mirrors dustinriley.com/src/styles/..." framing.
 
 - [ ] **Step 3: Commit each repo**
 
 ```bash
-cd /Users/dustin/Development/dustinriley.com && git add CLAUDE.md DESIGN.md && git commit -m "$(printf 'docs: point design-system docs at @dustinriley/design package\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>')"
-cd /Users/dustin/Development/scorigami && git add CLAUDE.md && git commit -m "$(printf 'docs: point design-system docs at @dustinriley/design package\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>')"
+cd /Users/dustin/Development/dustinriley.com && git add CLAUDE.md DESIGN.md && git commit -m "$(printf 'docs: point design-system docs at @dustin-riley/design package\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>')"
+cd /Users/dustin/Development/scorigami && git add CLAUDE.md && git commit -m "$(printf 'docs: point design-system docs at @dustin-riley/design package\n\nCo-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>')"
 ```
 
 ---
 
 ## Done criteria
 
-- `@dustinriley/design@0.1.0` is published to public npm with `tokens.css`, `core.css`, `tailwind.css`, `DESIGN.md`, and the `dustinriley-design` skill.
+- `@dustin-riley/design@0.1.0` is published to public npm with `tokens.css`, `core.css`, `tailwind.css`, `DESIGN.md`, and the `dustinriley-design` skill.
 - `npm test` in the package is green, including the bridge round-trip test (drift impossible).
 - dustinriley.com builds with **no rendered-HTML differences** vs. baseline and no local `tokens.css`.
 - scorigami builds/lints clean, defines zero `--ds-*` tokens locally, and the leaked `.hero`/blobs/`.experiment-grid`/`.writing-list` furniture is gone (when grep-confirmed unused).

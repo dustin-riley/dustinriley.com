@@ -5,10 +5,14 @@
 @plugin "@tailwindcss/typography";
 
 @import "@dustin-riley/design/tokens.css";
+@import "@dustin-riley/design/reset.css";
 @import "./safe.css";
 @import "./utilities.css";
 
 @layer base {
+  /* base.css is imported into @layer base AFTER reset.css's internal
+     @layer base, so the app's responsive heading sizes + display-font
+     correction win ties within the layer. */
   @import "./base.css";
 }
 

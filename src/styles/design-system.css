@@ -4,58 +4,12 @@
    Dustin Riley Design System — component styles
    ============================================================ */
 
+/* Base element styling (html/body/headings/links/inline code/::selection)
+   comes from @dustin-riley/design/reset.css (@layer base). `overflow-x:
+   clip` on html is kept here as an app layout concern; reset.css already
+   sets it on body. */
 html {
-  font-size: 16px;
   overflow-x: clip;
-}
-
-body {
-  background: var(--ds-bg);
-  color: var(--ds-text);
-  font-family: var(--ds-font-body);
-  font-size: var(--ds-fs-body);
-  line-height: var(--ds-lh-body);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  overflow-x: clip;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--ds-font-display);
-  color: var(--ds-text);
-  font-weight: 600;
-}
-
-a {
-  color: var(--ds-link);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  transition: color var(--ds-duration-fast) var(--ds-ease-standard);
-}
-
-a:hover {
-  color: var(--ds-link-hover);
-}
-
-code,
-pre,
-kbd,
-samp {
-  font-family: var(--ds-font-mono);
-  font-size: 0.9em;
-}
-
-code {
-  background: var(--ds-surface-sunken);
-  padding: 2px 6px;
-  border-radius: var(--ds-radius-sm);
-  border: 1px solid var(--ds-border);
 }
 
 /* Inside <pre>, let the syntax-highlighter (Shiki) render its own theme. */

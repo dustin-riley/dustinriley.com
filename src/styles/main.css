@@ -4,11 +4,14 @@
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
 
-@import "./tokens.css";
+@import "@dustin-riley/design/tokens.css";
 @import "./safe.css";
 @import "./utilities.css";
 
 @layer base {
+  /* The package's base element styling ships inside core.css at zero
+     specificity (:where), so base.css here (responsive heading sizes +
+     the display-font correction) wins automatically. */
   @import "./base.css";
 }
 

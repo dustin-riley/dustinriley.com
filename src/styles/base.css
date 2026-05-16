@@ -3,16 +3,19 @@ html {
 }
 
 body {
-  @apply bg-body font-primary font-normal leading-relaxed text-text;
+  @apply bg-body font-primary font-normal leading-normal text-text;
 }
 
+/* Headings use the display font (Outfit) at 600 — `font-primary` is the
+   body font (DM Sans) in this theme. This correction previously lived in
+   the design system's component layer; it belongs in the app base. */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  @apply font-primary font-bold leading-tight text-dark;
+  @apply font-secondary font-semibold leading-tight text-dark;
 }
 
 h1,

@@ -811,3 +811,15 @@ Corrective tasks completed:
 
 Uniform forward contract: every app imports `tokens` + `core` + `reset`
 (+ `tailwind` if Tailwind/shadcn). No per-app judgment.
+
+### Correction 2 — consumer-side layer(base)
+
+The "internally @layer base" reset.css (0.1.1) was proven wrong: Lightning CSS
+flattens a package-internal `@layer` pulled in via `@import`, so reset rules
+landed unlayered and re-underlined all links in both apps. Fix: consumers
+import with the layer set at their own `@import`:
+`@import "@dustin-riley/design/reset.css" layer(base);`. Applied to scorigami
+(`src/app/globals.css`) and dustinriley.com (`src/styles/main.css`); verified
+with a `@layer`-containment parser of the built CSS (reset `a`→base; nav/footer/
+`.ds-article` links + Shiki `pre code`→components, which win). Functional fix
+needs no republish; reset.css ships cleaned (plain rules) in 0.1.2 with docs.

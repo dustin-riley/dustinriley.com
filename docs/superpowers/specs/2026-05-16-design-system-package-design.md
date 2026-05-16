@@ -142,3 +142,33 @@ otherwise the package is untested and a third copy has been created.
 - Package build tooling / publish workflow (versioning, CI).
 - Whether `DESIGN.md` de-scoping requires content edits beyond removing
   dustinriley.com-specific references.
+
+---
+
+## Addendum 2026-05-16 — base resets are not tokens (post-implementation correction)
+
+**Problem found after shipping 0.1.0:** dustinriley.com showed visual
+regressions (every link underlined, article code re-themed, non-responsive
+headings). Root cause: the original plan put "base body/a/code/heading resets"
+into `tokens.css`, sourced from scorigami's `globals.css`. Consumers import
+`tokens.css` **unlayered**; in the CSS cascade unlayered rules beat every
+`@layer`, so those resets overrode the consumers' own layered component/prose
+rules (e.g. `.site-nav a {text-decoration:none}`, Tailwind `prose`). The resets
+themselves were the shared system's own rules — the defect was their *unlayered
+delivery via tokens.css*, not their content.
+
+**Correction:** Base element resets are project-opinionated, not tokens.
+- `tokens.css` = `:root` custom properties + `:focus-visible` ONLY. Cascade-safe
+  to import anywhere/unlayered.
+- New opt-in `@dustin-riley/design/reset.css` carries the element resets.
+  Consumers with no base layer of their own import it **into a cascade layer
+  weaker than their components** (`@layer base { @import ".../reset.css"; }`).
+  Consumers that already style their own base elements (dustinriley.com, via
+  its `design-system.css` + Tailwind typography) do NOT import it.
+- Shipped as 0.1.1.
+
+**Process flaw:** Task 7's "equivalence oracle" diffed only rendered HTML, so it
+was structurally blind to a pure-CSS cascade regression and the per-task +
+holistic reviews all passed. Verification for consumer conversions MUST include
+a computed-style/visual check (key elements: link `text-decoration`, code block
+rendering, responsive heading sizes), not an HTML diff alone.

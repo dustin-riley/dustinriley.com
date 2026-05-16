@@ -157,15 +157,26 @@ rules (e.g. `.site-nav a {text-decoration:none}`, Tailwind `prose`). The resets
 themselves were the shared system's own rules — the defect was their *unlayered
 delivery via tokens.css*, not their content.
 
-**Correction:** Base element resets are project-opinionated, not tokens.
+**Correction:** Base element resets are project-opinionated, not tokens — but
+the consumption contract must be **uniform across every app** (no per-app
+"do you have your own base layer?" judgment, since app #3+ are coming).
 - `tokens.css` = `:root` custom properties + `:focus-visible` ONLY. Cascade-safe
   to import anywhere/unlayered.
-- New opt-in `@dustin-riley/design/reset.css` carries the element resets.
-  Consumers with no base layer of their own import it **into a cascade layer
-  weaker than their components** (`@layer base { @import ".../reset.css"; }`).
-  Consumers that already style their own base elements (dustinriley.com, via
-  its `design-system.css` + Tailwind typography) do NOT import it.
-- Shipped as 0.1.1.
+- New `@dustin-riley/design/reset.css` carries the element resets, **wrapped
+  internally in `@layer base`** (the same base layer Tailwind v4 defines). Every
+  consuming app imports it the same way — `@import "@dustin-riley/design/reset.css";`
+  — with no `@layer` wrapper to remember and no footgun: app `@layer
+  components`/`utilities`, prose/typography plugins, and unlayered app CSS all
+  win over it automatically. It only sets the baseline where nothing else applies.
+- **No legacy exception.** dustinriley.com is normalized to the same contract:
+  its duplicate base element rules (`body`/`a`/`code`/heading `font-*`) are
+  removed from `src/styles/design-system.css`; it imports `reset.css` like every
+  other app. Its app-owned, intentionally-different rules stay where they belong
+  (responsive heading sizes in `base.css`; `.ds-article .article-body a`,
+  nav/footer/button `text-decoration:none` in `@layer components` — all of which
+  outrank `reset.css`'s `@layer base`).
+- Uniform forward contract for any app N: `tokens` + `core` + `reset`
+  (+ `tailwind` if Tailwind/shadcn). Shipped as 0.1.1.
 
 **Process flaw:** Task 7's "equivalence oracle" diffed only rendered HTML, so it
 was structurally blind to a pure-CSS cascade regression and the per-task +

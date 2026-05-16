@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Before any UI, copy, or styling change, read **[DESIGN.md](./DESIGN.md)**. It is the source of truth for tokens, components, voice, motion, and accessibility constraints. The `--ds-*` token system and the reusable `.ds-*` primitives now ship from the **`@dustin-riley/design`** npm package — tokens imported in `src/styles/main.css` (`@import "@dustin-riley/design/tokens.css";`) and primitives via `@import "@dustin-riley/design/core.css";` at the top of `src/styles/design-system.css`. The token system is canonical — never hard-code hex / px values, never invent new colors / radii / shadows. (There is no longer a local `src/styles/tokens.css`.)
 
+The design system is **owned by the `@dustin-riley/design` package**, not this repo. For its rationale, rules, contributor guidance, and the full root-cause history, read the package's own `DESIGN.md`, `CLAUDE.md`, and `docs/SPEC.md` (in `node_modules/@dustin-riley/design/` or github.com/dustin-riley/dustinriley-design). Design-system changes are made there and consumed here via the version bump — not patched locally.
+
 Quick rules pulled forward so they don't get missed:
 
 - **Sentence case everywhere. First person. No emoji.** "experiments", "writing", "about" — not "Experiments".
@@ -98,3 +100,5 @@ Several site behaviors are JSON-driven so they can be edited without touching co
 ## Plans / specs
 
 In-flight design specs and implementation plans live under `docs/superpowers/{specs,plans}/`. For non-trivial changes write the spec/plan there first.
+
+The `2026-05-16-design-system-package*` spec/plan here are the **historical extraction record** of how this site adopted `@dustin-riley/design`. The living, canonical design-system spec + decision history now lives **in the package repo** (`@dustin-riley/design` → `docs/SPEC.md`); update it there, not here.

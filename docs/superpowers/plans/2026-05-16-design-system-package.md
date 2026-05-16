@@ -823,3 +823,11 @@ import with the layer set at their own `@import`:
 with a `@layer`-containment parser of the built CSS (reset `a`→base; nav/footer/
 `.ds-article` links + Shiki `pre code`→components, which win). Functional fix
 needs no republish; reset.css ships cleaned (plain rules) in 0.1.2 with docs.
+
+### Correction 3 — final: :where() zero-specificity reset (0.1.2)
+
+reset.css wraps all selectors in :where() (zero specificity); plain `@import`,
+no @layer, no consumer layer() — deterministic per CSS spec, bundler-proof.
+Package 0.1.2 committed. After republish: bump both consumers to ^0.1.2 and
+revert their reset import to the plain form; re-verify (specificity reasoning +
+build/lint + visual).

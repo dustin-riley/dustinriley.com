@@ -213,3 +213,28 @@ functional fix works on 0.1.1 too (it is purely the consumer import form).
 **Process note:** verification must parse the *resolved `@layer` containment of
 the competing rules in the built CSS* (or use real computed styles), not merely
 confirm a rule/selector is present. "Rule exists" is not "rule wins."
+
+---
+
+## Addendum 3 2026-05-16 — final: `:where()` zero-specificity, plain import
+
+Requiring consumers to write `layer(base)` (addendum 2) works but is still an
+incantation to remember. Final approach: `reset.css` wraps every selector in
+`:where()`, giving it **zero specificity (0,0,0)**. Any author rule — a bare
+`a {}`, a component class, a prose/typography plugin — outranks it by normal
+specificity, with **no `@layer` and no consumer-side layer assignment**. This
+is deterministic per the CSS spec (not bundler-dependent like `@layer`), so it
+survives Lightning CSS / any pipeline. `::selection` stays a plain rule
+(pseudo-elements can't be `:where()`-wrapped; it is low-stakes and an app
+`::selection` still wins by source order).
+
+**Final uniform contract** (every app, plain import, nothing to remember):
+
+    @import "@dustin-riley/design/tokens.css";
+    @import "@dustin-riley/design/core.css";
+    @import "@dustin-riley/design/reset.css";
+    /* + @import "@dustin-riley/design/tailwind.css"; for Tailwind/shadcn */
+
+Shipped in 0.1.2. `reset.css` is plain, self-contained (no internal `@layer`,
+no `@import tokens`). Supersedes the addendum-2 `layer(base)` form; consumers
+revert to the plain `@import` once on 0.1.2.

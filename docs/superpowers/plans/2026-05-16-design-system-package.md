@@ -831,3 +831,14 @@ no @layer, no consumer layer() — deterministic per CSS spec, bundler-proof.
 Package 0.1.2 committed. After republish: bump both consumers to ^0.1.2 and
 revert their reset import to the plain form; re-verify (specificity reasoning +
 build/lint + visual).
+
+### Correction 4 — final: no reset.css, no global underline (0.2.0)
+
+Separate reset (any form) is always unlayered when imported → beats app
+layers; :where() doesn't fix layer-origin. Final: base styling folds into
+core.css (:where, zero-spec); package ships NO global link text-decoration
+(underline is a component/app decision; Preflight keeps links plain).
+Contract: tokens+core(+tailwind). Both apps on ^0.2.0, reset import removed,
+verified (only underline in built CSS is Preflight abbr / app prose /
+.ds-article .article-body a — zero package-origin). dustinriley.com base.css
+legacy heading-font fix retained.

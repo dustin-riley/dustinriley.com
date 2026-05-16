@@ -238,3 +238,34 @@ survives Lightning CSS / any pipeline. `::selection` stays a plain rule
 Shipped in 0.1.2. `reset.css` is plain, self-contained (no internal `@layer`,
 no `@import tokens`). Supersedes the addendum-2 `layer(base)` form; consumers
 revert to the plain `@import` once on 0.1.2.
+
+---
+
+## Addendum 4 2026-05-16 — final architecture: no reset, no global underline
+
+Addendum 3's `:where()`-but-still-separately-imported reset failed too: a
+plainly-`@import`ed package file is **unlayered**, and unlayered beats every
+`@layer` regardless of specificity — `:where()` zeroes specificity but not
+layer origin. So an imported package reset always beat Tailwind Preflight
+(`@layer base`) and app components (`@layer components`) → links underlined.
+
+**Final, structural resolution (0.2.0):**
+- There is **no separate `reset.css`** and no consumer `@layer`/`layer()`
+  ceremony. Minimal base element styling (body, headings, mono code,
+  `::selection`) folds into `core.css`, which apps already consume. Wrapped in
+  `:where()` so it never out-specifies app rules within an origin.
+- The system ships **no global link `text-decoration`**. Per DESIGN.md links
+  are color-only; underline is an intentional, component-scoped app decision
+  (e.g. `.ds-article .article-body a`, or the app's own Tailwind Typography
+  `prose`). Tailwind Preflight's `a{text-decoration:inherit}` then keeps links
+  un-underlined by default. Removing the conflicting declaration makes the
+  regression **structurally impossible** rather than cascade-managed.
+- Final contract, every app, nothing per-app:
+  `tokens` + `core` (+ `tailwind` for Tailwind/shadcn).
+- Legacy app quirks are fixed in the legacy app, not accommodated in the
+  package (dustinriley.com `base.css`: headings → display font; line-height).
+
+**Lesson:** don't ship a globally-applied opinionated declaration that a
+consumer's chrome must fight; and verify cascades by parsing resolved
+`@layer`/origin of competing rules in built CSS (or computed styles), never by
+"the rule/selector exists."

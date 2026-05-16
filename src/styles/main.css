@@ -5,7 +5,7 @@
 @plugin "@tailwindcss/typography";
 
 @import "@dustin-riley/design/tokens.css";
-@import "@dustin-riley/design/reset.css" layer(base);
+@import "@dustin-riley/design/reset.css";
 @import "./safe.css";
 @import "./utilities.css";
 

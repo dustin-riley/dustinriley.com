@@ -783,3 +783,31 @@ cd /Users/dustin/Development/scorigami && git add CLAUDE.md && git commit -m "$(
 - dustinriley.com builds with **no rendered-HTML differences** vs. baseline and no local `tokens.css`.
 - scorigami builds/lints clean, defines zero `--ds-*` tokens locally, and the leaked `.hero`/blobs/`.experiment-grid`/`.writing-list` furniture is gone (when grep-confirmed unused).
 - Both apps' CLAUDE.md/DESIGN.md point at the package; no duplicated token values remain anywhere.
+
+---
+
+## Corrective phase (post-0.1.0) — base-reset cascade regression
+
+After 0.1.0 shipped, both apps showed visual regressions (every link
+underlined, code re-themed; heading sizes off in drc). Root cause: `tokens.css`
+carried base element resets that, imported unlayered, beat all layered
+component overrides. See spec addendum (2026-05-16) for the full analysis.
+
+Corrective tasks completed:
+- **Package 0.1.1**: `tokens.css` → pure `:root` + `:focus-visible`. New
+  `@dustin-riley/design/reset.css`, internally `@layer base` (uniform,
+  footgun-free import for every app). Tests updated (13/13). Republished.
+- **scorigami**: consume 0.1.1, `@import "@dustin-riley/design/reset.css";`
+  (furniture in components/unlayered outranks it → nav no longer underlined).
+- **dustinriley.com (normalized, no legacy exception)**: consume 0.1.1, import
+  reset.css, remove the duplicate base element block from `design-system.css`,
+  and fix legacy `base.css` (headings → display font `font-secondary`/Outfit
+  600; body `line-height` → `--ds-lh-body`) so the app-owned base decisions
+  live in `base.css`, not the design-system component layer. Shiki `pre`/`pre
+  code`, `.ds-article .article-body a`, and all furniture preserved.
+- Verified via deterministic emitted-CSS cascade (chrome links `none`, article
+  links `underline`, headings Outfit, Shiki `pre code` transparent kept, no
+  unlayered package rules) + build/lint. Final visual pass: user.
+
+Uniform forward contract: every app imports `tokens` + `core` + `reset`
+(+ `tailwind` if Tailwind/shadcn). No per-app judgment.

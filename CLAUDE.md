@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Design system — read this first
 
-Before any UI, copy, or styling change, read **[DESIGN.md](./DESIGN.md)**. It is the source of truth for tokens, components, voice, motion, and accessibility constraints. The `--ds-*` token system (defined in `src/styles/tokens.css`) is canonical — never hard-code hex / px values, never invent new colors / radii / shadows.
+Before any UI, copy, or styling change, read **[DESIGN.md](./DESIGN.md)**. It is the source of truth for tokens, components, voice, motion, and accessibility constraints. The `--ds-*` token system and the reusable `.ds-*` primitives now ship from the **`@dustin-riley/design`** npm package — tokens imported in `src/styles/main.css` (`@import "@dustin-riley/design/tokens.css";`) and primitives via `@import "@dustin-riley/design/core.css";` at the top of `src/styles/design-system.css`. The token system is canonical — never hard-code hex / px values, never invent new colors / radii / shadows. (There is no longer a local `src/styles/tokens.css`.)
 
 Quick rules pulled forward so they don't get missed:
 
@@ -13,7 +13,7 @@ Quick rules pulled forward so they don't get missed:
 - **For text-as-link in burnt orange use `--ds-link`, not `--ds-primary`** — primary fails WCAG AA on the canvas. This is project-specific and easy to miss.
 - **Color is never the only state signal** — pair with elevation, motion, or an icon.
 - **Motion resolves under 300ms.** Use `--ds-ease-standard` with `--ds-duration-{fast,base,slow}`.
-- Prefer extending existing component classes in `src/styles/design-system.css` (see DESIGN.md → "Component anchors") over adding new ones.
+- Prefer extending the shared `.ds-*` primitives from `@dustin-riley/design/core.css` (see DESIGN.md → "Component anchors") over adding new ones. This site's own furniture lives in `src/styles/design-system.css`.
 
 ## Commands
 
@@ -42,7 +42,7 @@ Netlify is the deploy target (`netlify.toml` runs `yarn build` on push; `dist/` 
 
 The repo carries **two layered style systems** because it was forked from the Bookworm Astro theme and migrated to a custom design system. Both are still active:
 
-1. **Design system (canonical, prefer this)** — `--ds-*` CSS custom properties in `src/styles/tokens.css` and component classes in `src/styles/design-system.css`. Class names are prefixed `.ds-*` or are semantic (`.hero`, `.experiment-card`, `.writing-item`, `.site-nav`).
+1. **Design system (canonical, prefer this)** — the `--ds-*` CSS custom properties and reusable `.ds-*` primitives come from the **`@dustin-riley/design`** package: tokens imported in `src/styles/main.css` (`@import "@dustin-riley/design/tokens.css";`), primitives via `@import "@dustin-riley/design/core.css";` at the top of `src/styles/design-system.css`. `src/styles/design-system.css` itself now holds **only this site's furniture** (hero/blobs, experiment grid, writing list, site nav/footer, article, pager, related, search input, chip cloud) — no tokens, no shared primitives. There is no local `src/styles/tokens.css`. Site-furniture class names are semantic (`.hero`, `.experiment-card`, `.writing-item`, `.site-nav`).
 2. **Legacy Tailwind theme** — `src/tailwind-plugin/tw-theme.mjs` reads `src/config/theme.json` and exposes `--color-*` / `--text-h1` etc. to Tailwind utilities. Drives `.btn`, `.btn-primary`, `.container`, `.nav-link` font-weight, `.content` (prose), the older social-icons utilities. Treat as deprecated; refactor opportunistically when touching surrounding code.
 
 If you find yourself copying a legacy class into new code, that's a signal to use the design-system equivalent instead.
@@ -93,7 +93,7 @@ Several site behaviors are JSON-driven so they can be edited without touching co
 - `src/config/menu.json` — main nav items.
 - `src/config/social.json` — social URLs used in the footer.
 - `src/config/experiments.json` — experiment cards rendered by `ExperimentGrid.astro`.
-- `src/config/theme.json` — feeds the legacy Tailwind plugin (colors, font sizes). Editing this changes the Tailwind utility values but **not** the design-system tokens — change `tokens.css` for those.
+- `src/config/theme.json` — feeds the legacy Tailwind plugin (colors, font sizes). Editing this changes the Tailwind utility values but **not** the design-system tokens — those live in the `@dustin-riley/design` package, not in this repo.
 
 ## Plans / specs
 

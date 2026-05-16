@@ -1,6 +1,6 @@
 # Design system — dustinriley.com
 
-This file is the source of truth for visual / interaction decisions on this site. If you are an agent or contributor about to add UI, **read this file first**, then follow the pointers into `src/styles/` for the actual tokens and component CSS.
+This file is the source of truth for visual / interaction decisions on this site. If you are an agent or contributor about to add UI, **read this file first**. The actual tokens and reusable primitives ship from the **`@dustin-riley/design`** npm package (`tokens.css` / `core.css`); this site's own furniture lives in `src/styles/design-system.css`.
 
 The design is also distributed as a Claude Skill (`dustinriley-design`) generated at claude.ai/design — this doc reflects what that skill specifies and what the codebase has actually shipped.
 
@@ -24,8 +24,9 @@ The design is also distributed as a Claude Skill (`dustinriley-design`) generate
 
 | Concern | File |
 |---|---|
-| Design tokens (color, type, spacing, radius, shadow, motion) | `src/styles/tokens.css` |
-| Component styles (nav, hero, cards, article, buttons, etc.) | `src/styles/design-system.css` |
+| Design tokens (color, type, spacing, radius, shadow, motion) | `@dustin-riley/design/tokens.css` (imported in `src/styles/main.css`) |
+| Reusable `.ds-*` primitives | `@dustin-riley/design/core.css` (imported at top of `src/styles/design-system.css`) |
+| This site's own furniture (nav, hero/blobs, experiment grid, writing list, article, pager, related, search input, chip cloud, footer) | `src/styles/design-system.css` |
 | Tailwind base / Tailwind plugin theme bridge | `src/styles/main.css`, `src/styles/base.css`, `src/tailwind-plugin/tw-theme.mjs` |
 | Layout wrapper + font loading | `src/layouts/Base.astro` |
 | Header / Footer | `src/layouts/partials/Header.astro`, `src/layouts/partials/Footer.astro` |
@@ -177,7 +178,7 @@ For framework motion (Framer Motion etc.), use spring presets:
 
 ## Component anchors
 
-When building or modifying UI, prefer extending these existing patterns over inventing parallel ones. They're all defined in `src/styles/design-system.css`:
+When building or modifying UI, prefer extending these existing patterns over inventing parallel ones. The reusable `.ds-*` primitives come from `@dustin-riley/design/core.css`; the semantic site-furniture patterns (`.hero`, `.experiment-grid`, `.writing-list`, `.site-nav`, `.site-footer`) are defined locally in `src/styles/design-system.css`:
 
 | Pattern | Class |
 |---|---|
@@ -222,5 +223,5 @@ The system is intentionally lean. **Cohesion is the product; novelty is a liabil
 ## Caveats
 
 - Some legacy Tailwind utilities (`.btn`, `.btn-primary`, `.container`, `.nav-link` font-weight) survive from the original Bookworm template in `buttons.css`, `components.css`, `navigation.css`. Prefer the `--ds-*` / `.ds-*` system. Treat the legacy classes as deprecated; refactor opportunistically when touching surrounding code.
-- Fonts load from Google Fonts via `Base.astro`. If self-hosting later, drop `.woff2` files into a `fonts/` dir and update `tokens.css`.
+- Fonts load from Google Fonts via `Base.astro`. If self-hosting later, drop `.woff2` files into a `fonts/` dir and update the font tokens in the `@dustin-riley/design` package (not this repo).
 - The wordmark is currently the brand-dot + "dustinriley" lockup in `Header.astro`. There is no real logo asset yet.
